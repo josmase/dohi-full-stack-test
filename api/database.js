@@ -89,5 +89,14 @@ function getPlaces(pathID) {
     return query(sql, [pathID]);
 }
 
+/**
+ * Delete the bundle and its paths and places
+ * @param bundleID The id of the bundle to delete.
+ */
+function deleteBundle(bundleID) {
+    const sql = "DELETE FROM bundle WHERE id = ?";
+    return query(sql, [bundleID])
+}
 
+exports.deleteBundle = deleteBundle;
 exports.getBundles = getBundles;

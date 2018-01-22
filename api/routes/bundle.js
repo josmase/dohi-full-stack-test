@@ -18,6 +18,9 @@ router.get('/bundle/:id', (req, res) => {
             throw new Error(err)
         })
 });
-
+/* DELETE bundle */
+router.delete('/bundle/:id', (req, res) => {
+    database.deleteBundle(req.params.id).then(data => res.send(data.affectedRows))
+});
 
 module.exports = router;
