@@ -84,6 +84,11 @@ async function addPlacesToPaths(paths) {
     }
 }
 
+/**
+ * Gets all the places of a path.
+ * @param pathID The path id to find places from.
+ * @returns {*} Promise with array of places on success.
+ */
 function getPlaces(pathID) {
     const sql = "SELECT id, name, info, image, radius FROM place WHERE pathID=?";
     return query(sql, [pathID]);
