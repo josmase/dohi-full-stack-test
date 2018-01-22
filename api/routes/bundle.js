@@ -1,8 +1,23 @@
 const router = require('express').Router();
+const database = require('../database');
+
+/* GET bundles. */
+router.get('/bundle/', (req, res) => {
+    database.getBundles()
+        .then(data => res.send(data))
+        .catch(err => {
+            throw new Error(err)
+        })
+});
 
 /* GET bundle. */
 router.get('/bundle/:id', (req, res) => {
-    res.send(req.params.id);
+    database.getBundles(req.params.id)
+        .then(data => res.send(data))
+        .catch(err => {
+            throw new Error(err)
+        })
 });
+
 
 module.exports = router;
