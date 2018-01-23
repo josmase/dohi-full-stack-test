@@ -103,5 +103,53 @@ function deleteBundle(bundleID) {
     return query(sql, [bundleID])
 }
 
+/**
+ * Create a bundle and all of its paths and places.
+ * @param bundle The bundle to create.
+ * @returns {Promise<*|number>} The id of the newly created bundle.
+ */
+async function createBundle(bundle) {
+    const sql = "INSERT INTO bundle (name, image, info) VALUES (?, ?, ?)";
+    const bundleId = (await query(sql, [bundle.name, bundle.image, bundle.info])).insertId;
+    await createPaths(bundle.paths, bundleId);
+    return bundleId;
+}
+
+/**
+ * Create paths and the places for each path.
+ * @param paths The paths to create
+ * @param bundleId The id of the bundle the path belongs to.
+ * @returns {Promise<void>}
+ */
+async function createPaths(paths, bundleId) {
+    if (!paths) {
+        return;
+    }
+
+    const sql = "INSERT INTO path (name, info, length, duration, image, bundleID) VALUES (?, ?, ?, ?, ?, ?)";
+    await Promise.all(paths.map(async (path) => {
+        const pathId = (await query(sql, [path.name, path.info, path.length, path.duration, path.image, bundleId])).insertId;
+        await createPlaces(path.places, pathId);
+    }))
+}
+
+/**
+ * Create akk teh given places.
+ * @param places Places to create.
+ * @param pathId The id of the bundle that the place belongs to.
+ * @returns {Promise<void>}
+ */
+async function createPlaces(places, pathId) {
+    if (!places) {
+        return;
+    }
+
+    const sql = "INSERT INTO place (name, info, image, radius, pathID) VALUES (?, ?, ?, ?, ? )";
+    await Promise.all(places.map(async (place) => {
+        await query(sql, [place.name, place.info, place.image, place.radius, pathId]);
+    }))
+}
+
 exports.deleteBundle = deleteBundle;
 exports.getBundles = getBundles;
+exports.createBundle = createBundle;
