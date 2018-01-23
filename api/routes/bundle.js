@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const database = require('../database');
+const validator = require('../validator');
 
 /* GET bundles. */
 router.get('/bundle/', (req, res, next) => {
@@ -27,6 +28,16 @@ router.delete('/bundle/:id', (req, res, next) => {
             }
         })
         .catch(err => next(err))
+});
+
+/* CREATE bundle */
+router.post('/bundle/', (req, res, next) => {
+    validator.validate(req.body)
+        .then(() => res.send('done'))
+        .catch(err => {
+            err.status = 400;
+            next(err)
+        })
 });
 
 
