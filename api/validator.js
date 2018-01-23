@@ -9,11 +9,11 @@ function isObjectValid(schema, object) {
     Object.keys(schema.properties).every(prop => {
         let property = schema.properties[prop];
         if (!object.hasOwnProperty(prop) && property.required) {
-            throw  new Error(prop + ": Is required");
+            throw new Error(`${prop}: Is required`);
         } else if (object.hasOwnProperty(prop) && property.type === "array" && !Array.isArray(object[prop])) {
-            throw new Error(prop + ": Must be an array");
+            throw new Error(`${prop}: Must be an array`);
         } else if (object.hasOwnProperty(prop) && !Array.isArray(object[prop]) && typeof object[prop] !== property.type) {
-            throw new Error(prop + ": Must be of type " + property.type);
+            throw new Error(`${prop}: Must be of type ${property.type}`);
         }
     });
     return true;
