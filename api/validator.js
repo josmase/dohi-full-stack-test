@@ -2,31 +2,31 @@
  * Validates that a object does not miss required properties and that every property is of the correct type.
  * @param schema The schema to follow for validation.
  * @param object The object to validate.
- * @returns Error null on success. Otherwise and error describing what the problem is.
+ * @returns Boolean True if the object is valid.
+ * @throws Error on invalid object.
  */
-function validateObject(schema, object) {
-    let err = null;
+function isObjectValid(schema, object) {
     Object.keys(schema.properties).every(prop => {
         let property = schema.properties[prop];
         if (!object.hasOwnProperty(prop) && property.required) {
-            err = new Error(prop + ": Is required");
+            throw  new Error(prop + ": Is required");
         } else if (object.hasOwnProperty(prop) && property.type === "array" && !Array.isArray(object[prop])) {
-            err = new Error(prop + ": Must be an array");
+            throw new Error(prop + ": Must be an array");
         } else if (object.hasOwnProperty(prop) && !Array.isArray(object[prop]) && typeof object[prop] !== property.type) {
-            err = new Error(prop + ": Must be of type " + property.type);
+            throw new Error(prop + ": Must be of type " + property.type);
         }
-        return err === null;
     });
-    return err;
+    return true;
 }
 
 /**
- * Validates that teh bundle ands its paths and places are properly formatted.
+ * Validates that the bundle and its paths and places are properly formatted.
  * @param bundle The bundle to validate
- * @returns {Promise<Error>} Nothing on success. On failure an error with a message and http status code.
+ * @returns {Promise<Error>} Resolves on success
+ * @throws Error on invalid bundle format.
  */
 function validate(bundle) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         const bundleSchema = {
             "$schema": "http://json-schema.org/draft-06/schema#",
             type: 'object',
@@ -49,23 +49,17 @@ function validate(bundle) {
                 }
             }
         };
-        let err = validateObject(bundleSchema, bundle);
-        if (err === null) {
-            err = validatePaths(bundle.paths);
-        }
-        if (err === null) {
-            resolve()
-        } else {
-            err.status = 400;
-            reject(err);
-        }
+        isObjectValid(bundleSchema, bundle);
+        validatePaths(bundle.paths);
+        resolve()
     })
 }
 
 /**
  * Validates an array of paths and the places for each path.
  * @param paths The paths to validate.
- * @returns Error null on success. Otherwise an error.
+ * @returns nothing
+ * @throws Error On invalid format
  */
 function validatePaths(paths) {
     const pathSchema = {
@@ -98,23 +92,21 @@ function validatePaths(paths) {
             }
         }
     };
-    let err = null;
     if (paths) {
         paths.every(path => {
-            err = validateObject(pathSchema, path);
-            if (err === null && path.hasOwnProperty("places")) {
-                err = validatePlaces(path.places);
+            isObjectValid(pathSchema, path);
+            if (path.hasOwnProperty("places")) {
+                validatePlaces(path.places);
             }
-            return err === null;
         });
     }
-    return err
 }
 
 /**
  * Validates an array of places.
  * @param places The places to validate.
- * @returns Error null on success. Otherwise an error.
+ * @returns nothing
+ * @throws Error On invalid format
  */
 function validatePlaces(places) {
     const placesSchema = {
@@ -139,12 +131,7 @@ function validatePlaces(places) {
             }
         }
     };
-    let err = null;
-    places.every(place => {
-        err = validateObject(placesSchema, place);
-        return err === null;
-    });
-    return err;
+    places.every(place => isObjectValid(placesSchema, place));
 }
 
 exports.validate = validate;
