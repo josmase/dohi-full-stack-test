@@ -33,11 +33,8 @@ router.delete('/bundle/:id', (req, res, next) => {
 /* CREATE bundle */
 router.post('/bundle/', (req, res, next) => {
     validator.validate(req.body)
-        .then(() => res.send('done'))
-        .catch(err => {
-            err.status = 400;
-            next(err)
-        })
+        .then(() => database)
+        .catch(err => next(err))
 });
 
 

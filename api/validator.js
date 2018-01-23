@@ -45,6 +45,7 @@ function validate(bundle) {
         if (err === null) {
             resolve()
         } else {
+            err.status = 400;
             reject(err);
         }
     })
