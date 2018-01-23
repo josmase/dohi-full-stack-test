@@ -1,3 +1,9 @@
+/**
+ * Validates that a object does not miss required properties and that every property is of the correct type.
+ * @param schema The schema to follow for validation.
+ * @param object The object to validate.
+ * @returns Error null on success. Otherwise and error describing what the problem is.
+ */
 function validateObject(schema, object) {
     let err = null;
     Object.keys(schema.properties).every(prop => {
@@ -14,6 +20,11 @@ function validateObject(schema, object) {
     return err;
 }
 
+/**
+ * Validates that teh bundle ands its paths and places are properly formatted.
+ * @param bundle The bundle to validate
+ * @returns {Promise<Error>} Nothing on success. On failure an error with a message and http status code.
+ */
 function validate(bundle) {
     return new Promise((resolve, reject) => {
         const bundleSchema = {
@@ -51,6 +62,11 @@ function validate(bundle) {
     })
 }
 
+/**
+ * Validates an array of paths and the places for each path.
+ * @param paths The paths to validate.
+ * @returns Error null on success. Otherwise an error.
+ */
 function validatePaths(paths) {
     const pathSchema = {
         "$schema": "http://json-schema.org/draft-06/schema#",
@@ -93,9 +109,13 @@ function validatePaths(paths) {
         });
     }
     return err
-
 }
 
+/**
+ * Validates an array of places.
+ * @param places The places to validate.
+ * @returns Error null on success. Otherwise an error.
+ */
 function validatePlaces(places) {
     const placesSchema = {
         "$schema": "http://json-schema.org/draft-06/schema#",
