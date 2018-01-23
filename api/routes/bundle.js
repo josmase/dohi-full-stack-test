@@ -2,14 +2,14 @@ const router = require('express').Router();
 const database = require('../database');
 
 /* GET bundles. */
-router.get('/bundle/', (req, res) => {
+router.get('/bundle/', (req, res, next) => {
     database.getBundles()
         .then(data => res.send(data))
         .catch(err => next(err))
 });
 
 /* GET bundle. */
-router.get('/bundle/:id', (req, res) => {
+router.get('/bundle/:id', (req, res, next) => {
     database.getBundles(req.params.id)
         .then(data => res.send(data))
         .catch(err => next(err))
@@ -28,5 +28,6 @@ router.delete('/bundle/:id', (req, res, next) => {
         })
         .catch(err => next(err))
 });
+
 
 module.exports = router;
