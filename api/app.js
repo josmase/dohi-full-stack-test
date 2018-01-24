@@ -29,6 +29,9 @@ app.use((req, res, next) => {
 // error handler
 app.use((err, req, res, next) => {
     // set locals, only providing error in development
+    if (err.validation) {
+        err = handleValidationError(err.errors)
+    }
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
@@ -36,5 +39,18 @@ app.use((err, req, res, next) => {
     res.json(res.locals);
     next(err);
 });
+
+/**
+ * Takes an array of validation errors and create a new error from the first validation error.
+ * @param errors Array of validation errors
+ * @return {Error} The new error built from the first error in validation errors.
+ */
+function handleValidationError(errors) {
+    const {dataPath, message} = errors[0];
+    let err = new Error(message);
+    err.status = 400;
+    err.path = dataPath;
+    return err;
+}
 
 module.exports = app;

@@ -39,7 +39,7 @@ router.delete('/bundle/:id', (req, res, next) => {
 /* CREATE bundle */
 router.post('/bundle/', (req, res, next) => {
     if (!validate(req.body)) {
-        handleValidationError(validate.errors, next)
+        next({validation:true,errors:validate.errors});
     } else {
         database.createBundle(req.body)
             .then(data => res.send({id: data}))
@@ -50,20 +50,12 @@ router.post('/bundle/', (req, res, next) => {
 /* UPDATE bundle*/
 router.put('/bundle/', (req, res, next) => {
     if (!validate(req.body)) {
-        handleValidationError(validate.errors, next)
+
     } else {
         database.updateBundle(req.body)
             .then(data => res.send(data))
             .catch((err) => next(err))
     }
 });
-
-function handleValidationError(errors, next) {
-    const {dataPath, message} = errors[0];
-    let err = new Error(message);
-    err.status = 400;
-    err.path = dataPath;
-    next(err)
-}
 
 module.exports = router;
