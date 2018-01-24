@@ -4,7 +4,7 @@ const validator = require('../validator');
 
 /* GET bundles. */
 router.get('/bundle/', (req, res, next) => {
-    database.getBundles()
+    database.getBundles(null)
         .then(data => res.send(data))
         .catch(err => next(err))
 });
