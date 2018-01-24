@@ -229,6 +229,8 @@ module.exports = {
     createBundle,
     updateBundle: updateBundleCascading,
     deletePath,
-    deletePlace
+    deletePlace,
+    updatePaths,
+    updatePlaces
 };
 
