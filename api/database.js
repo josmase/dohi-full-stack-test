@@ -106,6 +106,17 @@ async function deletePath(pathId) {
 }
 
 /**
+ * Deletes a place from the database.
+ * @param placeId The id of the place to delete.
+ * @return {*} True if a row or more was deleted. False if there are no path with the given id.
+ */
+async function deletePlace(placeId) {
+    const sql = "DELETE FROM path WHERE id = ?";
+    return (await query(sql, [placeId])).affectedRows > 0;
+}
+
+
+/**
  * Create a bundle and all of its paths and places.
  * @param bundle The bundle to create.
  * @returns {Promise<*|number>} The id of the newly created bundle.
@@ -208,6 +219,7 @@ module.exports = {
     getBundles,
     createBundle,
     updateBundle: updateBundleCascading,
-    deletePath
+    deletePath,
+    deletePlace
 };
 
