@@ -95,6 +95,11 @@ function deleteBundle(bundleID) {
     return query(sql, [bundleID])
 }
 
+function deletePath(pathId) {
+    const sql = "DELETE FROM path WHERE id = ?";
+    return query(sql, [pathId])
+}
+
 /**
  * Create a bundle and all of its paths and places.
  * @param bundle The bundle to create.
@@ -193,7 +198,11 @@ function updatePlaces(places) {
     }))
 }
 
-exports.deleteBundle = deleteBundle;
-exports.getBundles = getBundles;
-exports.createBundle = createBundle;
-exports.updateBundle = updateBundleCascading;
+module.exports = {
+    deleteBundle,
+    getBundles,
+    createBundle,
+    updateBundle: updateBundleCascading,
+    deletePath
+};
+
