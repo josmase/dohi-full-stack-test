@@ -10,7 +10,7 @@ router.delete('/path/:id', (req, res, next) => {
                 err.status = 404;
                 next(err);
             } else {
-                res.send(data)
+                res.send({})
             }
         })
         .catch(err => next(err))
