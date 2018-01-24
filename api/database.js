@@ -88,11 +88,11 @@ function getPlaces(pathID) {
 
 /**
  * Delete the bundle and its paths and places
- * @param bundleID The id of the bundle to delete.
+ * @param bundleId The id of the bundle to delete.
+ * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
-async function deleteBundle(bundleID) {
-    const sql = "DELETE FROM bundle WHERE id = ?";
-    return (await query(sql, [bundleID])).affectedRows > 0;
+async function deleteBundle(bundleId) {
+    return deleteRowInTable(bundleId, 'bundle');
 }
 
 /**
@@ -101,8 +101,7 @@ async function deleteBundle(bundleID) {
  * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
 async function deletePath(pathId) {
-    const sql = "DELETE FROM path WHERE id = ?";
-    return (await query(sql, [pathId])).affectedRows > 0;
+    return deleteRowInTable(pathId, 'path');
 }
 
 /**
@@ -111,8 +110,18 @@ async function deletePath(pathId) {
  * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
 async function deletePlace(placeId) {
-    const sql = "DELETE FROM path WHERE id = ?";
-    return (await query(sql, [placeId])).affectedRows > 0;
+    return deleteRowInTable(placeId, 'place');
+}
+
+/**
+ * Delete a row in  a table matching the id.
+ * @param id The id of the row
+ * @param table The table to delete from.
+ * @return {Promise<boolean>} True if a row or more was deleted. False if there are no path with the given id.
+ */
+async function deleteRowInTable(id, table) {
+    const sql = "DELETE FROM ?? WHERE id = ?";
+    return (await query(sql, [table, id])).affectedRows > 0;
 }
 
 
