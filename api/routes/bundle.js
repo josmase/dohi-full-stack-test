@@ -24,8 +24,8 @@ router.get('/bundle/:id', (req, res, next) => {
 /* DELETE bundle */
 router.delete('/bundle/:id', (req, res, next) => {
     database.deleteBundle(req.params.id)
-        .then(data => {
-            if (data.affectedRows === 0) {
+        .then(deleted => {
+            if (!deleted) {
                 const err = new Error('Bundle not found: ' + req.params.id);
                 err.status = 404;
                 next(err);

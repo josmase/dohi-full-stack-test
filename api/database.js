@@ -90,14 +90,19 @@ function getPlaces(pathID) {
  * Delete the bundle and its paths and places
  * @param bundleID The id of the bundle to delete.
  */
-function deleteBundle(bundleID) {
+async function deleteBundle(bundleID) {
     const sql = "DELETE FROM bundle WHERE id = ?";
-    return query(sql, [bundleID])
+    return (await query(sql, [bundleID])).affectedRows > 0;
 }
 
-function deletePath(pathId) {
+/**
+ * Deletes a path from the database.
+ * @param pathId The id of the path to delete.
+ * @return {*} True if a row or more was deleted. False if there are no path with the given id.
+ */
+async function deletePath(pathId) {
     const sql = "DELETE FROM path WHERE id = ?";
-    return query(sql, [pathId])
+    return (await query(sql, [pathId])).affectedRows > 0;
 }
 
 /**
