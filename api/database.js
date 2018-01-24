@@ -2,6 +2,7 @@ const mysql = require('mysql');
 
 const pool = mysql.createPool({
     connectionLimit: 10,
+    multipleStatements: true,
     host: 'localhost',
     user: 'dohi',
     password: 'dohi',
@@ -39,7 +40,7 @@ function query(sql, inserts) {
  * @returns {Promise<*>} An array of bundles.
  */
 async function getBundles(bundleID) {
-    let sql = "SELECT id, name, image info FROM bundle";
+    let sql = "SELECT id, name, image, info FROM bundle";
 
     if (bundleID != null) {
         sql += " WHERE id=?";
@@ -142,6 +143,57 @@ async function createPlaces(places, pathId) {
     }))
 }
 
+/**
+ * Updates a whole bundle, including any paths and places.
+ * @param bundle The bundle to update containing changed data.
+ * @returns {*} The result fo the query
+ */
+function updateBundle(bundle) {
+    const statement = createUpdateBundleStatement(bundle) + createUpdatePathsStatement(bundle.paths);
+    return query(statement)
+}
+
+/**
+ * Creates the statement needed to update a single bundle. Without updating paths and places.
+ * @param bundle The bundle to use for updating
+ * @returns {string} Prepared sql statement
+ */
+function createUpdateBundleStatement(bundle) {
+    const {name, info, image, id} = bundle;
+    const sql = "UPDATE bundle SET name=?, info=?, image=? WHERE id=?;";
+    const inserts = [name, info, image, id];
+    return mysql.format(sql, inserts);
+}
+
+/**
+ * Create the statement for updating an array of paths and every place of each path. If there are any places.
+ * @param paths The paths to update.
+ * @return {string} Prepared sql statement
+ */
+function createUpdatePathsStatement(paths) {
+    return paths.map(path => {
+        const {name, info, length, duration, image, id, places} = path;
+        const sql = "UPDATE path SET  name=?, info=?, length=?, duration=?, image=? WHERE id=?;";
+        const inserts = [name, info, length, duration, image, id];
+        return mysql.format(sql, inserts) + (createUpdatePlacesStatement(places));
+    }).join('')
+}
+
+/**
+ * Create the statement for updating an array of places.
+ * @param places The places to update.
+ * @return {string} Prepared sql statement
+ */
+function createUpdatePlacesStatement(places) {
+    return places.map(place => {
+        const {name, info, image, radius, id} = place;
+        const sql = "UPDATE place SET  name=?, info=?, image=?, radius=? WHERE id=?;";
+        const inserts = [name, info, image, radius, id];
+        return mysql.format(sql, inserts);
+    }).join('')
+}
+
 exports.deleteBundle = deleteBundle;
 exports.getBundles = getBundles;
 exports.createBundle = createBundle;
+exports.updateBundle = updateBundle;

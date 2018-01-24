@@ -40,5 +40,15 @@ router.post('/bundle/', (req, res, next) => {
         .catch(err => next(err))
 });
 
+/* UPDATE bundle*/
+router.put('/bundle/', (req, res, next) => {
+    validator.validate(req.body)
+        .then(() => {
+            return database.updateBundle(req.body)
+        })
+        .then(data => res.send(data))
+        .catch((err) => next(err))
+});
+
 
 module.exports = router;
