@@ -45,22 +45,12 @@ async function getBundles(bundleID) {
         sql += " WHERE id=?";
     }
 
-    const bundles = await query(sql, bundleID);
-    for (let i = 0; i < bundles.length; i++) {
-        bundles[i].paths = await getBundleExtras(bundles[i].id);
-    }
-    return bundles;
-}
+    const bundles = await query(sql, [bundleID]);
 
-/**
- * Gets tha paths and the places for each path. WHere the paths are part of the bundle.
- * @param bundleID The id of the bundle to get paths from.
- * @returns {Promise<*>} All the paths and places.
- */
-async function getBundleExtras(bundleID) {
-    const paths = await getPaths(bundleID);
-    await addPlacesToPaths(paths);
-    return paths;
+    return Promise.all(bundles.map(async (bundle) => {
+        bundle.paths = await getPaths(bundle.id);
+        return bundle;
+    }));
 }
 
 /**
@@ -68,9 +58,10 @@ async function getBundleExtras(bundleID) {
  * @param bundleID The id of the bundle to get paths for.
  * @returns {*} All the paths for the bundle as a promise.
  */
-function getPaths(bundleID) {
+async function getPaths(bundleID) {
     const sql = "SELECT id, name, info, length, duration, image FROM path WHERE bundleID=?";
-    return query(sql, [bundleID])
+    const paths = await query(sql, [bundleID]);
+    return addPlacesToPaths(paths);
 }
 
 /**
@@ -79,9 +70,10 @@ function getPaths(bundleID) {
  * @returns {Promise<void>}
  */
 async function addPlacesToPaths(paths) {
-    for (let i = 0; i < paths.length; i++) {
-        paths[i].places = await getPlaces(paths[i].id)
-    }
+    return Promise.all(paths.map(async (path) => {
+        path.places = await getPlaces(path.id);
+        return path;
+    }));
 }
 
 /**
@@ -129,7 +121,7 @@ async function createPaths(paths, bundleId) {
     const sql = "INSERT INTO path (name, info, length, duration, image, bundleID) VALUES (?, ?, ?, ?, ?, ?)";
     await Promise.all(paths.map(async (path) => {
         const pathId = (await query(sql, [path.name, path.info, path.length, path.duration, path.image, bundleId])).insertId;
-        await createPlaces(path.places, pathId);
+        return createPlaces(path.places, pathId);
     }))
 }
 
@@ -145,8 +137,8 @@ async function createPlaces(places, pathId) {
     }
 
     const sql = "INSERT INTO place (name, info, image, radius, pathID) VALUES (?, ?, ?, ?, ? )";
-    await Promise.all(places.map(async (place) => {
-        await query(sql, [place.name, place.info, place.image, place.radius, pathId]);
+    await Promise.all(places.map(place => {
+        return query(sql, [place.name, place.info, place.image, place.radius, pathId]);
     }))
 }
 
