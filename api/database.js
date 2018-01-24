@@ -91,7 +91,7 @@ function getPlaces(pathID) {
  * @param bundleId The id of the bundle to delete.
  * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
-async function deleteBundle(bundleId) {
+function deleteBundle(bundleId) {
     return deleteRowInTable(bundleId, 'bundle');
 }
 
@@ -100,7 +100,7 @@ async function deleteBundle(bundleId) {
  * @param pathId The id of the path to delete.
  * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
-async function deletePath(pathId) {
+function deletePath(pathId) {
     return deleteRowInTable(pathId, 'path');
 }
 
@@ -109,7 +109,7 @@ async function deletePath(pathId) {
  * @param placeId The id of the place to delete.
  * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
-async function deletePlace(placeId) {
+function deletePlace(placeId) {
     return deleteRowInTable(placeId, 'place');
 }
 
