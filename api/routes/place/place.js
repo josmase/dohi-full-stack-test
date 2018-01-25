@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const place = require('place.database');
-const schemas = require('../../schemas');
+const schema = require('place.schema').schema;
 
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
-const validate = ajv.compile(schemas.place);
+const validate = ajv.compile(schema);
 /* DELETE path*/
 router.delete('/place/:id', (req, res, next) => {
     place.deletePlace(req.params.id)
@@ -26,7 +26,7 @@ router.put('/place/:id', (req, res, next) => {
     if (!validate(req.body)) {
         next({validation: true, errors: validate.errors});
     } else {
-        place.updatePlace(req.body,req.params.id)
+        place.updatePlace(req.body, req.params.id)
             .then(data => res.send(data))
             .catch((err) => next(err))
     }

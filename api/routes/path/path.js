@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const path = require('path.database');
-const schemas = require('../../schemas');
+const schema = require('path.schema').schema;
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
-const validate = ajv.compile(schemas.path);
+const validate = ajv.compile(schema);
 
 /* DELETE path*/
 router.delete('/path/:id', (req, res, next) => {

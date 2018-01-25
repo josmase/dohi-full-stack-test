@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const bundle = require('bundle.database');
-const schemas = require('../../schemas');
+const schema = require('bundle.schema').schema;
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
-const validate = ajv.compile(schemas.bundle);
+const validate = ajv.compile(schema);
 
 /* GET bundles. */
 router.get('/bundle/', (req, res, next) => {
@@ -37,7 +37,7 @@ router.delete('/bundle/:id', (req, res, next) => {
 /* CREATE bundle */
 router.post('/bundle/', (req, res, next) => {
     if (!validate(req.body)) {
-        next({validation:true,errors:validate.errors});
+        next({validation: true, errors: validate.errors});
     } else {
         bundle.createBundle(req.body)
             .then(data => res.send({id: data}))
@@ -50,7 +50,7 @@ router.put('/bundle/:id', (req, res, next) => {
     if (!validate(req.body)) {
 
     } else {
-        bundle.updateBundle(req.body,req.params.id)
+        bundle.updateBundle(req.body, req.params.id)
             .then(data => res.send(data))
             .catch((err) => next(err))
     }
