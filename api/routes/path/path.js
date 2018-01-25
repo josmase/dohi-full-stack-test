@@ -1,16 +1,17 @@
 const router = require('express').Router();
-const database = require('../database');
-const schemas = require('../schemas');
+const path = require('path.database');
+const schemas = require('../../schemas');
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
-const validate = ajv.compile(schemas.place);
+const validate = ajv.compile(schemas.path);
+
 /* DELETE path*/
-router.delete('/place/:id', (req, res, next) => {
-    database.deletePlace(req.params.id)
+router.delete('/path/:id', (req, res, next) => {
+    path.deletePath(req.params.id)
         .then(deleted => {
             if (!deleted) {
-                const err = new Error('Place not found: ' + req.params.id);
+                const err = new Error('Path not found: ' + req.params.id);
                 err.status = 404;
                 next(err);
             } else {
@@ -21,11 +22,11 @@ router.delete('/place/:id', (req, res, next) => {
 });
 
 /* UPDATE path*/
-router.put('/place/:id', (req, res, next) => {
+router.put('/path/:id', (req, res, next) => {
     if (!validate(req.body)) {
         next({validation: true, errors: validate.errors});
     } else {
-        database.updatePlace(req.body,req.params.id)
+        path.updatePath(req.body,req.params.id)
             .then(data => res.send(data))
             .catch((err) => next(err))
     }

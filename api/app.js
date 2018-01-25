@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 
 const index = require('./routes/index');
-const bundle = require('./routes/bundle');
-const path = require('./routes/path');
-const place = require('./routes/place');
+const bundle = require('./routes/bundle/bundle');
+const path = require('./routes/path/path');
+const place = require('./routes/place/place');
 
 const app = express();
 
