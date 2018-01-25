@@ -1,6 +1,5 @@
 module.exports = {
     bundle: {
-        id: 'bundle',
         type: 'object',
         properties: {
             name: {
@@ -16,7 +15,6 @@ module.exports = {
         required: ['name', 'info', 'image']
     },
     path: {
-        id: 'path',
         type: 'object',
         properties: {
             name: {
@@ -38,7 +36,6 @@ module.exports = {
         required: ['name', 'info', 'image', 'duration', 'length']
     },
     place: {
-        id: 'place',
         type: 'object',
         properties: {
             name: {
