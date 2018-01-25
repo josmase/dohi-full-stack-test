@@ -4,9 +4,7 @@ const schemas = require('../schemas');
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
-ajv.addSchema(schemas.pathSchema, schemas.pathSchema.id);
-ajv.addSchema(schemas.placeSchema, schemas.placeSchema.id);
-const validate = ajv.compile(schemas.bundleSchema);
+const validate = ajv.compile(schemas.bundle);
 
 /* GET bundles. */
 router.get('/bundle/', (req, res, next) => {
@@ -48,11 +46,11 @@ router.post('/bundle/', (req, res, next) => {
 });
 
 /* UPDATE bundle*/
-router.put('/bundle/', (req, res, next) => {
+router.put('/bundle/:id', (req, res, next) => {
     if (!validate(req.body)) {
 
     } else {
-        database.updateBundle(req.body)
+        database.updateBundle(req.body,req.params.id)
             .then(data => res.send(data))
             .catch((err) => next(err))
     }

@@ -173,64 +173,52 @@ async function createPlaces(places, pathId) {
 }
 
 /**
- * Updates a whole bundle, including any paths and places.
- * @param bundle The bundle to update containing changed data.
- * @returns {Promise<void>} Promise that resolves after every bundle, path and place is updated.
- */
-async function updateBundleCascading(bundle) {
-    await updateBundle(bundle);
-    return updatePaths(bundle.paths)
-}
-
-/**
- * Creates the statement needed to update a single bundle. Without updating paths and places.
+ * Updates a bundle mashing the id.
  * @param bundle The bundle to use for updating
+ * @param id The id of the bundle to update.
  * @returns {Promise<void>} Promise that resolves after every bundle is updated.
  */
-function updateBundle(bundle) {
-    const {name, info, image, id} = bundle;
+function updateBundle(bundle, id) {
+    const {name, info, image} = bundle;
     const sql = "UPDATE bundle SET name=?, info=?, image=? WHERE id=?;";
     const inserts = [name, info, image, id];
     return query(sql, inserts);
 }
 
 /**
- * Create the statement for updating an array of paths and every place of each path. If there are any places.
- * @param paths The paths to update.
+ * Updates a given path with the given path-data.
+ * @param path The path-data to use for updating.
+ * @param id The id of the path to update.
  * @return {Promise<void>} Promise that resolves after every path is updated.
  */
-function updatePaths(paths) {
-    return Promise.all(paths.map(async path => {
-        const {name, info, length, duration, image, id, places} = path;
-        const sql = "UPDATE path SET  name=?, info=?, length=?, duration=?, image=? WHERE id=?;";
-        const inserts = [name, info, length, duration, image, id];
-        await updatePlaces(places);
-        return query(sql, inserts)
-    }))
+function updatePath(path, id) {
+    const {name, info, length, duration, image} = path;
+    const sql = "UPDATE path SET  name=?, info=?, length=?, duration=?, image=? WHERE id=?;";
+    const inserts = [name, info, length, duration, image, id];
+    return query(sql, inserts)
 }
 
 /**
  * Create the statement for updating an array of places.
- * @param places The places to update.
- * @return {Promise<void>} Promise that resolves after every place is updated.
+ * @param place The place-data to update.
+ * @param id The id of the place to update.
+ * @return {Promise<void>} Promise that resolves after the place is updated.
  */
-function updatePlaces(places) {
-    return Promise.all(places.map(place => {
-        const {name, info, image, radius, id} = place;
-        const sql = "UPDATE place SET  name=?, info=?, image=?, radius=? WHERE id=?;";
-        const inserts = [name, info, image, radius, id];
-        return query(sql, inserts)
-    }))
+function updatePlace(place, id) {
+    const {name, info, image, radius} = place;
+    const sql = "UPDATE place SET  name=?, info=?, image=?, radius=? WHERE id=?;";
+    const inserts = [name, info, image, radius, id];
+    return query(sql, inserts)
 }
 
 module.exports = {
     deleteBundle,
     getBundles,
     createBundle,
-    updateBundle: updateBundleCascading,
+    updateBundle,
     deletePath,
     deletePlace,
-    updatePaths,
-    updatePlaces
+    updatePath,
+    updatePlace
 };
 

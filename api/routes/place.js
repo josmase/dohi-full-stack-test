@@ -4,8 +4,7 @@ const schemas = require('../schemas');
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
-ajv.addSchema(schemas.placeSchema, schemas.placeSchema.id);
-const validate = ajv.compile(schemas.places);
+const validate = ajv.compile(schemas.place);
 /* DELETE path*/
 router.delete('/place/:id', (req, res, next) => {
     database.deletePlace(req.params.id)
@@ -22,11 +21,11 @@ router.delete('/place/:id', (req, res, next) => {
 });
 
 /* UPDATE path*/
-router.put('/place/', (req, res, next) => {
+router.put('/place/:id', (req, res, next) => {
     if (!validate(req.body)) {
         next({validation: true, errors: validate.errors});
     } else {
-        database.updatePlaces(req.body)
+        database.updatePlace(req.body,req.params.id)
             .then(data => res.send(data))
             .catch((err) => next(err))
     }
