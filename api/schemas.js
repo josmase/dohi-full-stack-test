@@ -1,5 +1,5 @@
 module.exports = {
-    bundleSchema: {
+    bundle: {
         id: 'bundle',
         type: 'object',
         properties: {
@@ -11,17 +11,11 @@ module.exports = {
             },
             image: {
                 type: 'string'
-            },
-            paths: {
-                type: 'array',
-                items: {
-                    $ref: 'path'
-                }
             }
         },
         required: ['name', 'info', 'image']
     },
-    pathSchema: {
+    path: {
         id: 'path',
         type: 'object',
         properties: {
@@ -39,17 +33,11 @@ module.exports = {
             },
             length: {
                 type: 'string',
-            },
-            places: {
-                type: 'array',
-                items: {
-                    $ref: 'place'
-                }
             }
         },
         required: ['name', 'info', 'image', 'duration', 'length']
     },
-    placeSchema: {
+    place: {
         id: 'place',
         type: 'object',
         properties: {
