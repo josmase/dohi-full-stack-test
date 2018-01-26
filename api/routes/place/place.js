@@ -37,10 +37,17 @@ router.post('/place/:pathId', (req, res, next) => {
     if (!validate(req.body)) {
         next({validation: true, errors: validate.errors});
     } else {
-        place.create(req.body,req.params.pathId)
+        place.create(req.body, req.params.pathId)
             .then(data => res.send({id: data}))
             .catch(err => next(err))
     }
+});
+
+/* GET place */
+router.get('/place/:id', (req, res, next) => {
+    place.get(req.params.id)
+        .then(data => res.send(data))
+        .catch(err => next(err))
 });
 
 module.exports = router;

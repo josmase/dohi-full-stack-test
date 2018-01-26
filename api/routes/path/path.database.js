@@ -45,9 +45,20 @@ function gets(bundleID) {
     return query(sql, [bundleID]);
 }
 
+/**
+ * Get a path matching the id.
+ * @param id Id of the path to get.
+ * @returns {*} The path, if found.
+ */
+function get(id) {
+    const sql = "SELECT id, name, info, image, radius FROM place WHERE id=?";
+    return query(sql, [id]);
+}
+
 module.exports = {
     remove,
     create,
     update,
-    gets
+    gets,
+    get
 };

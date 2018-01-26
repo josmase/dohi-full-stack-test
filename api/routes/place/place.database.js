@@ -44,9 +44,21 @@ function gets(pathID) {
     return query(sql, [pathID]);
 }
 
+/**
+ * Gets the place matching the id.
+ * @param id Id of the path to get.
+ * @returns {*} The place, if found.
+ */
+function get(id) {
+    const sql = "SELECT id, name, info, image, radius FROM place WHERE id=?";
+    return query(sql, [id]);
+}
+
+
 module.exports = {
     remove,
     create,
     update,
-    gets
+    gets,
+    get
 };

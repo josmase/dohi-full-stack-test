@@ -26,7 +26,7 @@ router.put('/path/:id', (req, res, next) => {
     if (!validate(req.body)) {
         next({validation: true, errors: validate.errors});
     } else {
-        path.update(req.body,req.params.id)
+        path.update(req.body, req.params.id)
             .then(data => res.send(data))
             .catch((err) => next(err))
     }
@@ -37,10 +37,17 @@ router.post('/path/:bundleId', (req, res, next) => {
     if (!validate(req.body)) {
         next({validation: true, errors: validate.errors});
     } else {
-        path.create(req.body,req.params.bundleId)
+        path.create(req.body, req.params.bundleId)
             .then(data => res.send({id: data}))
             .catch(err => next(err))
     }
+});
+
+/* GET path */
+router.get('/path/:id', (req, res, next) => {
+    path.get(req.params.id)
+        .then(data => res.send(data))
+        .catch(err => next(err))
 });
 
 module.exports = router;
