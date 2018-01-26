@@ -50,4 +50,12 @@ router.get('/place/:id', (req, res, next) => {
         .catch(err => next(err))
 });
 
+
+/* GET places. */
+router.get('/places/:pathId', (req, res, next) => {
+    place.gets(req.params.pathId)
+        .then(data => res.send(data))
+        .catch(err => next(err))
+});
+
 module.exports = router;

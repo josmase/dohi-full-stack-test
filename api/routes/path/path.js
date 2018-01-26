@@ -50,4 +50,12 @@ router.get('/path/:id', (req, res, next) => {
         .catch(err => next(err))
 });
 
+
+/* GET paths. */
+router.get('/paths/:bundleId', (req, res, next) => {
+    path.gets(req.params.bundleId)
+        .then(data => res.send(data))
+        .catch(err => next(err))
+});
+
 module.exports = router;
