@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const place = require('place.database');
-const schema = require('place.schema').schema;
+const place = require('./place.database.js');
+const schema = require('./place.schema.js').schema;
 
 
 const Ajv = require('ajv');

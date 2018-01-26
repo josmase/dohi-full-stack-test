@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const path = require('path.database');
-const schema = require('path.schema').schema;
+const path = require('./path.database.js');
+const schema = require('./path.schema.js').schema;
 
 const Ajv = require('ajv');
 const ajv = new Ajv();

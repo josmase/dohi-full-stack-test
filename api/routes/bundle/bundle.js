@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const bundle = require('bundle.database');
-const schema = require('bundle.schema').schema;
+const bundle = require('./bundle.database.js');
+const schema = require('./bundle.schema.js').schema;
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
