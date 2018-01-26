@@ -11,9 +11,7 @@ router.delete('/path/:id', (req, res, next) => {
     path.remove(req.params.id)
         .then(deleted => {
             if (!deleted) {
-                const err = new Error('Path not found: ' + req.params.id);
-                err.status = 404;
-                next(err);
+                next({notFound: true, name: 'Path', id: req.params.id})
             } else {
                 res.send({})
             }
@@ -46,7 +44,13 @@ router.post('/path/:bundleId', (req, res, next) => {
 /* GET path */
 router.get('/path/:id', (req, res, next) => {
     path.get(req.params.id)
-        .then(data => res.send(data))
+        .then(data => {
+            if (data.length === 0) {
+                next({notFound: true, name: 'Path', id: req.params.id})
+            } else {
+                res.send(data)
+            }
+        })
         .catch(err => next(err))
 });
 
@@ -54,7 +58,13 @@ router.get('/path/:id', (req, res, next) => {
 /* GET paths. */
 router.get('/paths/:bundleId', (req, res, next) => {
     path.gets(req.params.bundleId)
-        .then(data => res.send(data))
+        .then(data => {
+            if (data.length === 0) {
+                next({notFound: true, name: 'Paths', id: req.params.bundleId})
+            } else {
+                res.send(data)
+            }
+        })
         .catch(err => next(err))
 });
 

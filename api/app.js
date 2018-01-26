@@ -31,6 +31,8 @@ app.use((err, req, res, next) => {
     // set locals, only providing error in development
     if (err.validation) {
         err = handleValidationError(err.errors)
+    } else if (err.notFound) {
+        err = handleNotFoundError(err)
     }
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -51,6 +53,13 @@ function handleValidationError(errors) {
     err.status = 400;
     err.path = dataPath;
     return err;
+}
+
+function handleNotFoundError(err) {
+    const {name, id} = err;
+    const formattedError = new Error(`${name} matching the id: ${id}, could not be found`);
+    formattedError.status = 404;
+    return formattedError;
 }
 
 module.exports = app;

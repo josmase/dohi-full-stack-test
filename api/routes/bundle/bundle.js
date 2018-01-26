@@ -16,7 +16,13 @@ router.get('/bundles/', (req, res, next) => {
 /* GET bundle. */
 router.get('/bundle/:id', (req, res, next) => {
     bundle.gets(req.params.id)
-        .then(data => res.send(data))
+        .then(data => {
+            if(data.length === 0){
+                next({notFound: true,name:'Bundle',id:req.params.id})
+            } else {
+                res.send(data)
+            }
+        })
         .catch(err => next(err))
 });
 /* DELETE bundle */
@@ -24,9 +30,7 @@ router.delete('/bundle/:id', (req, res, next) => {
     bundle.remove(req.params.id)
         .then(deleted => {
             if (!deleted) {
-                const err = new Error('Bundle not found: ' + req.params.id);
-                err.status = 404;
-                next(err);
+                next({notFound: true,name:'Bundle',id:req.params.id})
             } else {
                 res.send({})
             }
