@@ -6,7 +6,7 @@ const {query, deleteRowInTable} = require('../../database');
  * @param id The id of the bundle to update.
  * @returns {Promise<void>} Promise that resolves after every bundle is updated.
  */
-function updateBundle(bundle, id) {
+function update(bundle, id) {
     const {name, info, image} = bundle;
     const sql = "UPDATE bundle SET name=?, info=?, image=? WHERE id=?;";
     const inserts = [name, info, image, id];
@@ -18,7 +18,7 @@ function updateBundle(bundle, id) {
  * @param bundle The bundle to create.
  * @returns {Promise<number>} The id of the created bundle
  */
-async function createBundle(bundle) {
+async function create(bundle) {
     const sql = "INSERT INTO bundle (name, image, info) VALUES (?, ?, ?)";
     return (await query(sql, [bundle.name, bundle.image, bundle.info])).insertId;
 }
@@ -28,7 +28,7 @@ async function createBundle(bundle) {
  * @param bundleId The id of the bundle to delete.
  * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
-function deleteBundle(bundleId) {
+function remove(bundleId) {
     return deleteRowInTable(bundleId, 'bundle');
 }
 
@@ -38,7 +38,7 @@ function deleteBundle(bundleId) {
  * @param bundleID Optional. The id of the bundle to get.
  * @returns {Promise<*>} An array of bundles.
  */
-async function getBundles(bundleID) {
+async function gets(bundleID) {
     let sql = "SELECT id, name, image, info FROM bundle";
 
     if (bundleID != null) {
@@ -54,8 +54,8 @@ async function getBundles(bundleID) {
 }
 
 module.exports = {
-    deleteBundle,
-    createBundle,
-    updateBundle,
-    getBundles
+    remove,
+    create,
+    update,
+    gets
 };

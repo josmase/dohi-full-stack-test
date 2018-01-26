@@ -8,7 +8,7 @@ const validate = ajv.compile(schema);
 
 /* DELETE path*/
 router.delete('/path/:id', (req, res, next) => {
-    path.deletePath(req.params.id)
+    path.remove(req.params.id)
         .then(deleted => {
             if (!deleted) {
                 const err = new Error('Path not found: ' + req.params.id);
@@ -26,7 +26,7 @@ router.put('/path/:id', (req, res, next) => {
     if (!validate(req.body)) {
         next({validation: true, errors: validate.errors});
     } else {
-        path.updatePath(req.body,req.params.id)
+        path.update(req.body,req.params.id)
             .then(data => res.send(data))
             .catch((err) => next(err))
     }
@@ -37,7 +37,7 @@ router.post('/path/:bundleId', (req, res, next) => {
     if (!validate(req.body)) {
         next({validation: true, errors: validate.errors});
     } else {
-        path.createPath(req.body,req.params.bundleId)
+        path.create(req.body,req.params.bundleId)
             .then(data => res.send({id: data}))
             .catch(err => next(err))
     }

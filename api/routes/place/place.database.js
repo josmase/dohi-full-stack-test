@@ -5,7 +5,7 @@ const {query, deleteRowInTable} = require('../../database');
  * @param placeId The id of the place to delete.
  * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
-function deletePlace(placeId) {
+function remove(placeId) {
     return deleteRowInTable(placeId, 'place');
 }
 
@@ -15,7 +15,7 @@ function deletePlace(placeId) {
  * @param pathId The id of the bundle that the place belongs to.
  * @returns {Promise<number>} The id of the created place
  */
-async function createPlace(place, pathId) {
+async function create(place, pathId) {
     const sql = "INSERT INTO place (name, info, image, radius, pathID) VALUES (?, ?, ?, ?, ? )";
     return (await query(sql, [place.name, place.info, place.image, place.radius, pathId])).insertId;
 }
@@ -26,7 +26,7 @@ async function createPlace(place, pathId) {
  * @param id The id of the place to update.
  * @return {Promise<void>} Promise that resolves after the place is updated.
  */
-function updatePlace(place, id) {
+function update(place, id) {
     const {name, info, image, radius} = place;
     const sql = "UPDATE place SET  name=?, info=?, image=?, radius=? WHERE id=?;";
     const inserts = [name, info, image, radius, id];
@@ -39,14 +39,14 @@ function updatePlace(place, id) {
  * @param pathID The path id to find places from.
  * @returns {*} Promise with array of places on success.
  */
-function getPlaces(pathID) {
+function gets(pathID) {
     const sql = "SELECT id, name, info, image, radius FROM place WHERE pathID=?";
     return query(sql, [pathID]);
 }
 
 module.exports = {
-    deletePlace,
-    createPlace,
-    updatePlace,
-    getPlaces
+    remove,
+    create,
+    update,
+    gets
 };

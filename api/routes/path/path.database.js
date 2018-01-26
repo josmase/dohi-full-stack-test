@@ -4,7 +4,7 @@
  * @param id The id of the path to update.
  * @return {Promise<void>} Promise that resolves after every path is updated.
  */
-function updatePath(path, id) {
+function update(path, id) {
     const {name, info, length, duration, image} = path;
     const sql = "UPDATE path SET  name=?, info=?, length=?, duration=?, image=? WHERE id=?;";
     const inserts = [name, info, length, duration, image, id];
@@ -20,7 +20,7 @@ const {query, deleteRowInTable} = require('../../database');
  * @param bundleId The id of the bundle the path belongs to.
  * @returns {Promise<number>} The id of the created path
  */
-async function createPath(path, bundleId) {
+async function create(path, bundleId) {
     const sql = "INSERT INTO path (name, info, length, duration, image, bundleID) VALUES (?, ?, ?, ?, ?, ?)";
     return (await query(sql, [path.name, path.info, path.length, path.duration, path.image, bundleId])).insertId;
 }
@@ -31,7 +31,7 @@ async function createPath(path, bundleId) {
  * @param pathId The id of the path to delete.
  * @return {*} True if a row or more was deleted. False if there are no path with the given id.
  */
-function deletePath(pathId) {
+function remove(pathId) {
     return deleteRowInTable(pathId, 'path');
 }
 
@@ -40,15 +40,15 @@ function deletePath(pathId) {
  * @param bundleID The id of the bundle to get paths for.
  * @returns {*} All the paths for the bundle as a promise.
  */
-async function getPaths(bundleID) {
+async function gets(bundleID) {
     const sql = "SELECT id, name, info, length, duration, image FROM path WHERE bundleID=?";
     const paths = await query(sql, [bundleID]);
-    return addPlacesToPaths(paths);
+    return addPlacesTos(paths);
 }
 
 module.exports = {
-    deletePath,
-    createPath,
-    updatePath,
-    getPaths
+    remove,
+    create,
+    update,
+    gets
 };
