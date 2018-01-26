@@ -32,4 +32,15 @@ router.put('/path/:id', (req, res, next) => {
     }
 });
 
+/* CREATE path */
+router.post('/path/:bundleId', (req, res, next) => {
+    if (!validate(req.body)) {
+        next({validation: true, errors: validate.errors});
+    } else {
+        path.createPath(req.body,req.params.bundleId)
+            .then(data => res.send({id: data}))
+            .catch(err => next(err))
+    }
+});
+
 module.exports = router;

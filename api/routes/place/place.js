@@ -32,4 +32,15 @@ router.put('/place/:id', (req, res, next) => {
     }
 });
 
+/* CREATE path */
+router.post('/place/:pathId', (req, res, next) => {
+    if (!validate(req.body)) {
+        next({validation: true, errors: validate.errors});
+    } else {
+        place.createPlace(req.body,req.params.pathId)
+            .then(data => res.send({id: data}))
+            .catch(err => next(err))
+    }
+});
+
 module.exports = router;
