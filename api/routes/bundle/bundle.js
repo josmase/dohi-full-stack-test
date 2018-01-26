@@ -7,7 +7,7 @@ const ajv = new Ajv();
 const validate = ajv.compile(schema);
 
 /* GET bundles. */
-router.get('/bundle/', (req, res, next) => {
+router.get('/bundles/', (req, res, next) => {
     bundle.gets(null)
         .then(data => res.send(data))
         .catch(err => next(err))
