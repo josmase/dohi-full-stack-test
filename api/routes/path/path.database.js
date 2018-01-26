@@ -40,10 +40,9 @@ function remove(pathId) {
  * @param bundleID The id of the bundle to get paths for.
  * @returns {*} All the paths for the bundle as a promise.
  */
-async function gets(bundleID) {
+function gets(bundleID) {
     const sql = "SELECT id, name, info, length, duration, image FROM path WHERE bundleID=?";
-    const paths = await query(sql, [bundleID]);
-    return addPlacesTos(paths);
+    return query(sql, [bundleID]);
 }
 
 module.exports = {
