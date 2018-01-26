@@ -10,25 +10,19 @@ function updatePath(path, id) {
     const inserts = [name, info, length, duration, image, id];
     return query(sql, inserts)
 }
+
 const {query, deleteRowInTable} = require('../../database');
 
 
 /**
- * Create paths and the places for each path.
- * @param paths The paths to create
+ * Create a path and math it to the bundleID
+ * @param path The path to create
  * @param bundleId The id of the bundle the path belongs to.
- * @returns {Promise<void>}
+ * @returns {Promise<number>} The id of the created path
  */
-async function createPaths(paths, bundleId) {
-    if (!paths) {
-        return;
-    }
-
+async function createPath(path, bundleId) {
     const sql = "INSERT INTO path (name, info, length, duration, image, bundleID) VALUES (?, ?, ?, ?, ?, ?)";
-    await Promise.all(paths.map(async (path) => {
-        const pathId = (await query(sql, [path.name, path.info, path.length, path.duration, path.image, bundleId])).insertId;
-        return createPlaces(path.places, pathId);
-    }))
+    return (await query(sql, [path.name, path.info, path.length, path.duration, path.image, bundleId])).insertId;
 }
 
 
@@ -54,7 +48,7 @@ async function getPaths(bundleID) {
 
 module.exports = {
     deletePath,
-    createPaths,
+    createPath,
     updatePath,
     getPaths
 };

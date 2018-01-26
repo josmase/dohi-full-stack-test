@@ -16,13 +16,11 @@ function updateBundle(bundle, id) {
 /**
  * Create a bundle and all of its paths and places.
  * @param bundle The bundle to create.
- * @returns {Promise<*|number>} The id of the newly created bundle.
+ * @returns {Promise<number>} The id of the created bundle
  */
 async function createBundle(bundle) {
     const sql = "INSERT INTO bundle (name, image, info) VALUES (?, ?, ?)";
-    const bundleId = (await query(sql, [bundle.name, bundle.image, bundle.info])).insertId;
-    await createPaths(bundle.paths, bundleId);
-    return bundleId;
+    return (await query(sql, [bundle.name, bundle.image, bundle.info])).insertId;
 }
 
 /**

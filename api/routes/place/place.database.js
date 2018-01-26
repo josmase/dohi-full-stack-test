@@ -10,20 +10,14 @@ function deletePlace(placeId) {
 }
 
 /**
- * Create akk teh given places.
- * @param places Places to create.
+ * Create a single place
+ * @param place The place to create
  * @param pathId The id of the bundle that the place belongs to.
- * @returns {Promise<void>}
+ * @returns {Promise<number>} The id of the created place
  */
-async function createPlaces(places, pathId) {
-    if (!places) {
-        return;
-    }
-
+async function createPlace(place, pathId) {
     const sql = "INSERT INTO place (name, info, image, radius, pathID) VALUES (?, ?, ?, ?, ? )";
-    await Promise.all(places.map(place => {
-        return query(sql, [place.name, place.info, place.image, place.radius, pathId]);
-    }))
+    return (await query(sql, [place.name, place.info, place.image, place.radius, pathId])).insertId;
 }
 
 /**
@@ -52,7 +46,7 @@ function getPlaces(pathID) {
 
 module.exports = {
     deletePlace,
-    createPlaces,
+    createPlace,
     updatePlace,
     getPlaces
 };
