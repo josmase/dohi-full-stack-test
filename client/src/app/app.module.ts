@@ -7,6 +7,7 @@ import { BundleComponent } from './bundle/bundle.component';
 import { PathComponent } from './path/path.component';
 import { PlaceComponent } from './place/place.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {DataService} from "./data.service";
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import {AppRoutingModule} from "./app-routing.module";
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
