@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-place',
@@ -7,9 +8,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaceComponent implements OnInit {
 
-  constructor() { }
+  places: Object[];
+
+  constructor(private dataService: DataService) {
+  }
 
   ngOnInit() {
+    this.get();
+  }
+
+  get() {
+    this.dataService.get("places")
+      .then(data => {
+        this.places = data;
+      })
+      .catch(err => console.log(err))
+  }
+
+  update(place) {
+    this.dataService.put("place", place, place.id)
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+  }
+
+  delete(id: Number) {
+    this.dataService.delete("place", id)
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+  }
+
+  create(place) {
+    this.dataService.post('place', place)
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
   }
 
 }
