@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BundleComponent } from './bundle/bundle.component';
 import { PathComponent } from './path/path.component';
 import { PlaceComponent } from './place/place.component';
+import {AppRoutingModule} from "./app-routing.module";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PlaceComponent } from './place/place.component';
     PlaceComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,18 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {BundleComponent} from "./bundle/bundle.component";
+import {PlaceComponent} from "./place/place.component";
+import {PathComponent} from "./path/path.component";
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', component: BundleComponent},
+  {path: 'paths/:bundleId:', component: PathComponent},
+  {path: 'places/:pathId:', component: PlaceComponent},
+];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
