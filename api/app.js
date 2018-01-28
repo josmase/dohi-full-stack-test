@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const logger = require('morgan');
 
 const index = require('./routes/index');
@@ -12,6 +13,9 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(cors());
+app.options('*', cors());
 
 app.use(index);
 app.use(bundle);
