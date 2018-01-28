@@ -34,23 +34,13 @@ function remove(bundleId) {
 
 
 /**
- * Gets the bundle matching the bundle id. If no id is given all bundles will be returned. Every bundle contains paths and places.
+ * Gets the bundle matching the bundle id. If no id is given all bundles will be returned.
  * @param bundleID Optional. The id of the bundle to get.
  * @returns {Promise<*>} An array of bundles.
  */
-async function gets(bundleID) {
-    let sql = "SELECT id, name, image, info FROM bundle";
-
-    if (bundleID != null) {
-        sql += " WHERE id=?";
-    }
-
-    const bundles = await query(sql, [bundleID]);
-
-    return Promise.all(bundles.map(async (bundle) => {
-        bundle.paths = await getPaths(bundle.id);
-        return bundle;
-    }));
+function gets(bundleID = null) {
+    let sql = `SELECT id, name, image, info FROM bundle ${bundleID === null ? "" : "WHERE id=?"}`;
+    return query(sql, [bundleID]);
 }
 
 module.exports = {
