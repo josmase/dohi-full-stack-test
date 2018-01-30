@@ -9,7 +9,7 @@ import {PathComponent} from './path/path.component';
 import {PlaceComponent} from './place/place.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {DataService} from "./data.service";
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatToolbarModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
 import { PathFormComponent } from './path/path-form/path-form.component';
@@ -36,7 +36,8 @@ import { PlaceFormComponent } from './place/place-form/place-form.component';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
