@@ -9,7 +9,9 @@ import {PathComponent} from './path/path.component';
 import {PlaceComponent} from './place/place.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {DataService} from "./data.service";
-import {MatCardModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from "@angular/material";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -21,9 +23,14 @@ import {MatCardModule} from "@angular/material";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
