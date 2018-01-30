@@ -7,7 +7,7 @@
                  type="text"
                  name="name"
                  placeholder="Name"
-                 value="{{bundle.name}}">
+                 [(ngModel)]="bundle.name">
         </mat-form-field>
 
         <mat-form-field>
@@ -15,7 +15,7 @@
                  type="url"
                  name="image"
                  placeholder="Image url"
-                 value="{{bundle.image}}">
+                 [(ngModel)]="bundle.image">
         </mat-form-field>
 
         <mat-form-field>
@@ -23,7 +23,7 @@
                  type="text"
                  name="info"
                  placeholder="Info"
-                 value="{{bundle.info}}">
+                 [(ngModel)]="bundle.info">
         </mat-form-field>
       </mat-card-content>
 

@@ -7,7 +7,7 @@
                  type="text"
                  name="name"
                  placeholder="Name"
-                 value="{{path.name}}">
+                 [(ngModel)]="path.name">
         </mat-form-field>
 
         <mat-form-field>
@@ -15,7 +15,7 @@
                  type="url"
                  name="image"
                  placeholder="Image url"
-                 value="{{path.image}}">
+                 [(ngModel)]="path.image">
         </mat-form-field>
 
         <mat-form-field>
@@ -23,7 +23,7 @@
                  type="text"
                  name="info"
                  placeholder="Info"
-                 value="{{path.info}}">
+                 [(ngModel)]="path.info">
         </mat-form-field>
 
         <mat-form-field>
@@ -31,7 +31,7 @@
                  type="text"
                  name="length"
                  placeholder="Length"
-                 value="{{path.length}}">
+                 [(ngModel)]="path.length">
         </mat-form-field>
 
         <mat-form-field>
@@ -39,7 +39,7 @@
                  type="text"
                  name="duration"
                  placeholder="Duration"
-                 value="{{path.duration}}">
+                 [(ngModel)]="path.duration">
         </mat-form-field>
       </mat-card-content>
 
