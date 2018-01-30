@@ -6,8 +6,8 @@ import {PathComponent} from "./path/path.component";
 
 const routes: Routes = [
   {path: '', component: BundleComponent},
-  {path: 'paths/:bundleId:', component: PathComponent},
-  {path: 'places/:pathId:', component: PlaceComponent},
+  {path: 'paths/:bundleId', component: PathComponent},
+  {path: 'places/:pathId', component: PlaceComponent},
 ];
 
 @NgModule({
