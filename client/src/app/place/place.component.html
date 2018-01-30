@@ -1,11 +1,6 @@
 <div class="wrapper">
   <mat-card *ngFor="let place of places">
-    <form #placeForm="ngForm" (ngSubmit)="update(place)">
-      <app-place-form [place]="place"></app-place-form>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!placeForm.valid">Update</button>
-        <button mat-button color="warn" (click)="delete(place.id)">Delete</button>
-      </mat-card-actions>
-    </form>
+    <app-place-form [place]="place" (onSubmit)="update($event)"></app-place-form>
   </mat-card>
 </div>
+<button mat-fab>+</button>

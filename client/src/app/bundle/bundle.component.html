@@ -1,12 +1,5 @@
 <div class="wrapper">
   <mat-card *ngFor="let bundle of bundles">
-    <form #bundleForm="ngForm" (ngSubmit)="update(bundle)">
-      <app-bundle-form [bundle]="bundle"></app-bundle-form>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!bundleForm.valid">Update</button>
-        <a mat-raised-button [routerLink]="['/paths',bundle.id]">Edit paths</a>
-        <button mat-button color="warn" (click)="delete(bundle.id)">Delete</button>
-      </mat-card-actions>
-    </form>
+    <app-bundle-form [bundle]="bundle" (onSubmit)="update($event)"></app-bundle-form>
   </mat-card>
 </div>

@@ -1,12 +1,6 @@
 <div class="wrapper">
   <mat-card *ngFor="let path of paths">
-    <form #pathForm="ngForm" (ngSubmit)="update(path)">
-      <app-path-form [path]="path"></app-path-form>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!pathForm.valid">Update</button>
-        <a mat-raised-button [routerLink]="['/places',path.id]">Edit places</a>
-        <button mat-button color="warn" (click)="delete(path.id)">Delete</button>
-      </mat-card-actions>
-    </form>
+      <app-path-form [path]="path" (onSubmit)="update($event)"></app-path-form>
+
   </mat-card>
 </div>

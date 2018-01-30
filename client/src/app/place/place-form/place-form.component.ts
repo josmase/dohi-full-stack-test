@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-place-form',
@@ -7,9 +7,15 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PlaceFormComponent implements OnInit {
   @Input() place: object;
-  constructor() { }
+  @Output() onSubmit: EventEmitter<object> = new EventEmitter<object>();
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  sendSubmit() {
+    this.onSubmit.emit(this.place);
+  }
 }

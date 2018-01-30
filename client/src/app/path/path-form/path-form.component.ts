@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-path-form',
@@ -7,11 +7,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PathFormComponent implements OnInit {
   @Input() path: object;
+  @Output() onSubmit: EventEmitter<object> = new EventEmitter<object>();
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  sendSubmit() {
+    this.onSubmit.emit(this.path);
   }
 
 }
