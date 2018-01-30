@@ -1,3 +1,53 @@
-<p>
-  path works!
-</p>
+<div class="wrapper">
+  <mat-card *ngFor="let path of paths">
+    <form #pathForm="ngForm" (ngSubmit)="update(path)">
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput
+                 type="text"
+                 name="name"
+                 placeholder="Name"
+                 value="{{path.name}}">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 type="url"
+                 name="image"
+                 placeholder="Image url"
+                 value="{{path.image}}">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 type="text"
+                 name="info"
+                 placeholder="Info"
+                 value="{{path.info}}">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 type="text"
+                 name="length"
+                 placeholder="Length"
+                 value="{{path.length}}">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 type="text"
+                 name="duration"
+                 placeholder="Duration"
+                 value="{{path.duration}}">
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!pathForm.valid">Update</button>
+        <a mat-raised-button [routerLink]="['/places',path.id]">Edit places</a>
+        <button mat-button color="warn" (click)="delete(path.id)">Delete</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from "../data.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-path',
@@ -8,16 +9,20 @@ import {DataService} from "../data.service";
 })
 export class PathComponent implements OnInit {
   paths: Object[];
+  private bundleId: Number;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.get();
+    this.route.paramMap.subscribe(params => {
+      this.bundleId = parseInt(params.get('bundleId'));
+      this.get();
+    })
   }
 
   get() {
-    this.dataService.get("paths")
+    this.dataService.get("paths", this.bundleId)
       .then(data => {
         this.paths = data;
       })
