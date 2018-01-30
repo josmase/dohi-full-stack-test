@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../data.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-place',
@@ -9,16 +10,20 @@ import {DataService} from "../data.service";
 export class PlaceComponent implements OnInit {
 
   places: Object[];
+  private pathId: number;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private route:ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.get();
+    this.route.paramMap.subscribe(params => {
+      this.pathId = parseInt(params.get('pathId'));
+      this.get();
+    })
   }
 
   get() {
-    this.dataService.get("places")
+    this.dataService.get("places",this.pathId)
       .then(data => {
         this.places = data;
       })
