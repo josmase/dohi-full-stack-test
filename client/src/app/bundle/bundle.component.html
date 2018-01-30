@@ -1,3 +1,7 @@
+<h1 class="mat-h1">Create</h1>
+<mat-card>
+  <app-bundle-form [isCreate]="true" [bundle]="{}" (onSubmit)=(create($event))></app-bundle-form>
+</mat-card>
 <div class="wrapper">
   <mat-card *ngFor="let bundle of bundles">
     <app-bundle-form [bundle]="bundle" (onSubmit)="update($event)"></app-bundle-form>

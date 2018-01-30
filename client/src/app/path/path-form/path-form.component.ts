@@ -7,12 +7,15 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class PathFormComponent implements OnInit {
   @Input() path: object;
+  @Input() isCreate: boolean;
   @Output() onSubmit: EventEmitter<object> = new EventEmitter<object>();
+  private submitText: string;
 
   constructor() {
   }
 
   ngOnInit() {
+    this.submitText = this.isCreate ? "Create" : "Update";
   }
 
   sendSubmit() {

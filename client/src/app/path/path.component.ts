@@ -9,7 +9,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class PathComponent implements OnInit {
   paths: Object[];
-  private bundleId: Number;
+  private bundleId: number;
 
   constructor(private dataService: DataService, private route: ActivatedRoute) {
   }
@@ -42,8 +42,8 @@ export class PathComponent implements OnInit {
   }
 
   create(path) {
-    this.dataService.post('path', path)
-      .then(data => console.log(data))
+    this.dataService.post('path', path, this.bundleId)
+      .then(() => this.get())
       .catch(err => console.log(err))
   }
 

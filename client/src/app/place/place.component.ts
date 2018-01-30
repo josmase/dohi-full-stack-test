@@ -12,7 +12,7 @@ export class PlaceComponent implements OnInit {
   places: Object[];
   private pathId: number;
 
-  constructor(private dataService: DataService, private route:ActivatedRoute) {
+  constructor(private dataService: DataService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class PlaceComponent implements OnInit {
   }
 
   get() {
-    this.dataService.get("places",this.pathId)
+    this.dataService.get("places", this.pathId)
       .then(data => {
         this.places = data;
       })
@@ -43,9 +43,8 @@ export class PlaceComponent implements OnInit {
   }
 
   create(place) {
-    this.dataService.post('place', place)
-      .then(data => console.log(data))
+    this.dataService.post('place', place, this.pathId)
+      .then(() => this.get())
       .catch(err => console.log(err))
   }
-
 }

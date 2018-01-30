@@ -12,9 +12,9 @@ import {DataService} from "./data.service";
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatToolbarModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
-import { PathFormComponent } from './path/path-form/path-form.component';
-import { BundleFormComponent } from './bundle/bundle-form/bundle-form.component';
-import { PlaceFormComponent } from './place/place-form/place-form.component';
+import {PathFormComponent} from './path/path-form/path-form.component';
+import {BundleFormComponent} from './bundle/bundle-form/bundle-form.component';
+import {PlaceFormComponent} from './place/place-form/place-form.component';
 
 
 @NgModule({

@@ -1,6 +1,9 @@
+<h1 class="mat-h1">Create</h1>
+<mat-card>
+  <app-path-form [isCreate]="true" [path]="{}" (onSubmit)=(create($event))></app-path-form>
+</mat-card>
 <div class="wrapper">
   <mat-card *ngFor="let path of paths">
       <app-path-form [path]="path" (onSubmit)="update($event)"></app-path-form>
-
   </mat-card>
 </div>

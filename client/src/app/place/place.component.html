@@ -1,6 +1,10 @@
+<h1 class="mat-h1">Create</h1>
+<mat-card>
+  <app-place-form [isCreate]="true" [place]="{}" (onSubmit)=(create($event))></app-place-form>
+</mat-card>
 <div class="wrapper">
+  <h1 class="mat-h1">Update</h1>
   <mat-card *ngFor="let place of places">
     <app-place-form [place]="place" (onSubmit)="update($event)"></app-place-form>
   </mat-card>
 </div>
-<button mat-fab>+</button>

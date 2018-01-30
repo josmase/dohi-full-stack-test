@@ -38,7 +38,7 @@ export class BundleComponent implements OnInit {
 
   create(bundle) {
     this.dataService.post('bundle', bundle)
-      .then(data => console.log(data))
+      .then(() => this.get())
       .catch(err => console.log(err))
   }
 }

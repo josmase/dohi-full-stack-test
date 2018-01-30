@@ -28,8 +28,8 @@ export class DataService {
     return this.http.delete(url).toPromise();
   }
 
-  post(type: String, body: Object) {
-    const url = `${this.apiEndpoint}${type}/`;
+  post(type: String, body: Object, id: number = null) {
+    const url = `${this.apiEndpoint}${type}/${id ? id : ""}`;
     return this.http.post(url, body, this.httpOptions).toPromise();
   }
 

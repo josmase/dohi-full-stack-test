@@ -25,8 +25,8 @@
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!bundleForm.valid">Update</button>
-    <a mat-raised-button [routerLink]="['/paths',bundle.id]">Edit paths</a>
-    <button mat-button color="warn" (click)="delete(bundle.id)">Delete</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!bundleForm.valid">{{submitText}}</button>
+    <a *ngIf="!isCreate" mat-raised-button [routerLink]="['/paths',bundle.id]">Edit paths</a>
+    <button *ngIf="!isCreate" mat-button color="warn" (click)="delete(bundle.id)">Delete</button>
   </mat-card-actions>
 </form>
