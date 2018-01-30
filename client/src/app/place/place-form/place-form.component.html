@@ -34,6 +34,6 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" type="submit" [disabled]="!placeForm.valid">{{submitText}}</button>
-    <button *ngIf="!isCreate" mat-button color="warn" (click)="delete(place.id)">Delete</button>
+    <button *ngIf="!isCreate" mat-button color="warn" (click)="sendDelete()">Delete</button>
   </mat-card-actions>
 </form>

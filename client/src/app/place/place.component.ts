@@ -36,9 +36,11 @@ export class PlaceComponent implements OnInit {
       .catch(err => console.log(err))
   }
 
-  delete(id: Number) {
-    this.dataService.delete("place", id)
-      .then(data => console.log(data))
+  delete(place, index: number) {
+    this.dataService.delete("place", place.id)
+      .then(() => {
+        this.places.splice(index, 1);
+      })
       .catch(err => console.log(err))
   }
 

@@ -9,6 +9,7 @@ export class PlaceFormComponent implements OnInit {
   @Input() place: object;
   @Input() isCreate: boolean;
   @Output() onSubmit: EventEmitter<object> = new EventEmitter<object>();
+  @Output() onDelete: EventEmitter<object> = new EventEmitter<object>();
   private submitText: string;
 
   constructor() {
@@ -20,5 +21,9 @@ export class PlaceFormComponent implements OnInit {
 
   sendSubmit() {
     this.onSubmit.emit(this.place);
+  }
+
+  sendDelete() {
+    this.onDelete.emit(this.place)
   }
 }

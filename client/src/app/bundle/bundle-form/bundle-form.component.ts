@@ -9,6 +9,7 @@ export class BundleFormComponent implements OnInit {
   @Input() bundle: object;
   @Input() isCreate: boolean;
   @Output() onSubmit: EventEmitter<object> = new EventEmitter<object>();
+  @Output() onDelete: EventEmitter<object> = new EventEmitter<object>();
   private submitText: string;
 
   constructor() {
@@ -20,6 +21,10 @@ export class BundleFormComponent implements OnInit {
 
   sendSubmit() {
     this.onSubmit.emit(this.bundle);
+  }
+
+  sendDelete() {
+    this.onDelete.emit(this.bundle)
   }
 
 

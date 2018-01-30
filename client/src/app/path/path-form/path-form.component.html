@@ -43,6 +43,6 @@
   <mat-card-actions>
     <button mat-raised-button color="primary" type="submit" [disabled]="!pathForm.valid">{{submitText}}</button>
     <a *ngIf="!isCreate" mat-raised-button [routerLink]="['/places',path.id]">Edit places</a>
-    <button *ngIf="!isCreate" mat-button color="warn" (click)="delete(path.id)">Delete</button>
+    <button *ngIf="!isCreate" mat-button color="warn" (click)="sendDelete()">Delete</button>
   </mat-card-actions>
 </form>

@@ -4,7 +4,7 @@
 </mat-card>
 <div class="wrapper">
   <h1 class="mat-h1">Update</h1>
-  <mat-card *ngFor="let place of places">
-    <app-place-form [place]="place" (onSubmit)="update($event)"></app-place-form>
+  <mat-card *ngFor="let place of places;let i=index">
+    <app-place-form [place]="place" (onSubmit)="update($event)" (onDelete)="delete($event,i)"></app-place-form>
   </mat-card>
 </div>

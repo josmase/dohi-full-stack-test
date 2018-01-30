@@ -3,7 +3,7 @@
   <app-path-form [isCreate]="true" [path]="{}" (onSubmit)=(create($event))></app-path-form>
 </mat-card>
 <div class="wrapper">
-  <mat-card *ngFor="let path of paths">
-      <app-path-form [path]="path" (onSubmit)="update($event)"></app-path-form>
+  <mat-card *ngFor="let path of paths;let i=index">
+    <app-path-form [path]="path" (onSubmit)="update($event)" (onDelete)="delete($event,i)"></app-path-form>
   </mat-card>
 </div>

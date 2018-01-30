@@ -9,6 +9,7 @@ export class PathFormComponent implements OnInit {
   @Input() path: object;
   @Input() isCreate: boolean;
   @Output() onSubmit: EventEmitter<object> = new EventEmitter<object>();
+  @Output() onDelete: EventEmitter<object> = new EventEmitter<object>();
   private submitText: string;
 
   constructor() {
@@ -20,6 +21,10 @@ export class PathFormComponent implements OnInit {
 
   sendSubmit() {
     this.onSubmit.emit(this.path);
+  }
+
+  sendDelete() {
+    this.onDelete.emit(this.path)
   }
 
 }

@@ -35,9 +35,11 @@ export class PathComponent implements OnInit {
       .catch(err => console.log(err))
   }
 
-  delete(id: Number) {
-    this.dataService.delete("path", id)
-      .then(data => console.log(data))
+  delete(path, index) {
+    this.dataService.delete("path", path.id)
+      .then(() => {
+        this.paths.splice(index, 1);
+      })
       .catch(err => console.log(err))
   }
 

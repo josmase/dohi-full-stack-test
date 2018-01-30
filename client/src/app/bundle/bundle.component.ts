@@ -30,9 +30,11 @@ export class BundleComponent implements OnInit {
       .catch(err => console.log(err))
   }
 
-  delete(id: Number) {
-    this.dataService.delete("bundle", id)
-      .then(data => console.log(data))
+  delete(bundle, index) {
+    this.dataService.delete("bundle", bundle.id)
+      .then(() => {
+        this.bundles.splice(index, 1);
+      })
       .catch(err => console.log(err))
   }
 
