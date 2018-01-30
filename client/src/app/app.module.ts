@@ -12,6 +12,9 @@ import {DataService} from "./data.service";
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
+import { PathFormComponent } from './path/path-form/path-form.component';
+import { BundleFormComponent } from './bundle/bundle-form/bundle-form.component';
+import { PlaceFormComponent } from './place/place-form/place-form.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import {FormsModule} from "@angular/forms";
     AppComponent,
     BundleComponent,
     PathComponent,
-    PlaceComponent
+    PlaceComponent,
+    PathFormComponent,
+    BundleFormComponent,
+    PlaceFormComponent
   ],
   imports: [
     BrowserModule,

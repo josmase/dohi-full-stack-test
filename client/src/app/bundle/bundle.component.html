@@ -1,32 +1,7 @@
 <div class="wrapper">
   <mat-card *ngFor="let bundle of bundles">
     <form #bundleForm="ngForm" (ngSubmit)="update(bundle)">
-      <mat-card-content>
-        <mat-form-field>
-          <input matInput
-                 type="text"
-                 name="name"
-                 placeholder="Name"
-                 [(ngModel)]="bundle.name">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput
-                 type="url"
-                 name="image"
-                 placeholder="Image url"
-                 [(ngModel)]="bundle.image">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput
-                 type="text"
-                 name="info"
-                 placeholder="Info"
-                 [(ngModel)]="bundle.info">
-        </mat-form-field>
-      </mat-card-content>
-
+      <app-bundle-form [bundle]="bundle"></app-bundle-form>
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit" [disabled]="!bundleForm.valid">Update</button>
         <a mat-raised-button [routerLink]="['/paths',bundle.id]">Edit paths</a>
