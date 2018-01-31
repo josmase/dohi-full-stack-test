@@ -2,12 +2,20 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.0. 
 And [Express generator](https://expressjs.com/en/starter/generator.html) version 4.15.5.
-
 ## API
 
 ### Development server
 
-Run `set DEBUG=myapp:* & npm start` on Windows, `DEBUG=myapp:* npm start` on MacOS and Linux.
+Run `npm start` to start the server.
+
+### Database
+
+The database that should be used is MySQL or equivalent.
+
+The settings for changing the database are in the `database.js` file. 
+These should be changed to the correct `host`,`user`,`password` and`database`.
+
+Setup of the tables is done by running the `setup.sql` file on the database that is going to be used.  
 
 ### Endpoints
 
