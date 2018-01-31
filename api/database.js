@@ -33,23 +33,6 @@ function query(sql, inserts) {
     })
 }
 
-
-/**
- * Iterates all the paths and adds its places.
- * @param paths All the paths to add to.
- * @returns {Promise<void>}
- */
-async function addPlacesToPaths(paths) {
-    return Promise.all(paths.map(async (path) => {
-        path.places = await getPlaces(path.id);
-        return path;
-    }));
-}
-
-
-
-
-
 /**
  * Delete a row in  a table matching the id.
  * @param id The id of the row
