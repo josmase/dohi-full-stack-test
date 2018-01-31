@@ -1,8 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="sendSubmit()">
   <mat-card-content>
-    <div *ngFor="let input of inputs">
+    <span *ngFor="let input of inputs">
       <app-dynamic-input [input]="input" [form]="form"></app-dynamic-input>
-    </div>
+    </span>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">{{submitText}}</button>
