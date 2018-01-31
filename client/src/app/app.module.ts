@@ -12,7 +12,6 @@ import {DataService} from "./data.service";
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatToolbarModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BundleFormComponent} from './bundle/bundle-form/bundle-form.component';
 import {DynamicInputComponent} from './dynamic-form/dynamic-input/dynamic-input.component';
 import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
 
@@ -23,7 +22,6 @@ import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
     BundleComponent,
     PathComponent,
     PlaceComponent,
-    BundleFormComponent,
     DynamicInputComponent,
     DynamicFormComponent
   ],

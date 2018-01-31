@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../data.service";
+import {BundleObject} from "./bundle-object";
+import {Bundle} from "./bundle";
 
 @Component({
   selector: 'app-bundle',
@@ -19,13 +21,15 @@ export class BundleComponent implements OnInit {
   get() {
     this.dataService.get("bundles")
       .then(data => {
-        this.bundles = data;
+        this.bundles = data.map((bundle: BundleObject) => {
+          return new Bundle(bundle.id, bundle.name, bundle.info, bundle.image)
+        });
       })
       .catch(err => console.log(err))
   }
 
   update(bundle) {
-    this.dataService.put("bundle", bundle, bundle.id)
+    this.dataService.put("bundle", bundle.item, bundle.id)
       .then(data => console.log(data))
       .catch(err => console.log(err))
   }
