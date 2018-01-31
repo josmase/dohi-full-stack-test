@@ -8,3 +8,9 @@ mat-card {
   flex: 1 0 30%;
   margin: 5px;
 }
+
+.fab {
+  position: absolute;
+  right: 23px;
+  bottom: 23px;
+}

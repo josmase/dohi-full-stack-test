@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+mat-card {
+  flex: 1 0 30%;
+  margin: 5px;
+}
+.fab{
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
