@@ -21,7 +21,7 @@ export class BundleComponent implements OnInit {
 
 
   create() {
-    this.dialog.open(new Bundle());
+    this.dialog.open(new Bundle()).subscribe(() => this.get());
   }
 
   get() {

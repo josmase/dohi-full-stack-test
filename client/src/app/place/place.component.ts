@@ -52,6 +52,6 @@ export class PlaceComponent implements OnInit {
   }
 
   create() {
-    this.dialog.open(new Place(this.pathId));
+    this.dialog.open(new Place(this.pathId)).subscribe(()=>this.get());
   }
 }

@@ -50,7 +50,7 @@ export class PathComponent implements OnInit {
   }
 
   create() {
-    this.dialog.open(new Path(this.bundleId));
+    this.dialog.open(new Path(this.bundleId)).subscribe(()=>this.get());
   }
 
 }
