@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Delete all</h2>
+<h2 mat-dialog-title>Create a {{data.type}}</h2>
 <mat-dialog-content>
   <app-dynamic-form [item]="data" [isCreate]="true" (onSubmit)="create($event)"
                     (onDelete)="delete($event,i)"></app-dynamic-form>
