@@ -4,8 +4,8 @@ import {InputBase} from "../input-base";
 export class Place extends BasicItem {
   radius: InputBase;
 
-  constructor(id: number, name: string, info: string, image: string, radius: number) {
-    super(id, name, info, image);
+  constructor(type: string, id: number, name: string, info: string, image: string, radius: number) {
+    super(id, type, name, info, image);
     this.radius = new InputBase({key: 'radius', label: 'Radius', value: radius, required: true, type: 'number'})
   }
 
