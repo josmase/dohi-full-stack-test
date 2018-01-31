@@ -5,7 +5,7 @@ export class Path extends BasicItem {
   length: InputBase;
   duration: InputBase;
 
-  constructor(type: string, id: number, name: string, info: string, image: string, length: string, duration: string) {
+  constructor(type: string, id?: number, name?: string, info?: string, image?: string, length?: string, duration?: string) {
     super(id, type, name, info, image);
     this.length = new InputBase({key: 'length', label: 'Length', value: length, required: true, type: 'text'});
     this.duration = new InputBase({key: 'duration', label: 'Duration', value: duration, required: true, type: 'text'})
