@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="sendSubmit()">
+  <mat-card-content>
+    <div *ngFor="let input of inputs">
+      <app-dynamic-input [input]="input" [form]="form"></app-dynamic-input>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">{{submitText}}</button>
+    <button *ngIf="!isCreate" mat-button color="warn" (click)="sendDelete()">Delete</button>
+  </mat-card-actions>
+</form>

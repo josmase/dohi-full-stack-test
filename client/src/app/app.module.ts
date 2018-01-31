@@ -11,10 +11,12 @@ import {AppRoutingModule} from "./app-routing.module";
 import {DataService} from "./data.service";
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatToolbarModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PathFormComponent} from './path/path-form/path-form.component';
 import {BundleFormComponent} from './bundle/bundle-form/bundle-form.component';
 import {PlaceFormComponent} from './place/place-form/place-form.component';
+import { DynamicInputComponent } from './dynamic-form/dynamic-input/dynamic-input.component';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 
 
 @NgModule({
@@ -25,12 +27,15 @@ import {PlaceFormComponent} from './place/place-form/place-form.component';
     PlaceComponent,
     PathFormComponent,
     BundleFormComponent,
-    PlaceFormComponent
+    PlaceFormComponent,
+    DynamicInputComponent,
+    DynamicFormComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     MatCardModule,
