@@ -35,11 +35,11 @@ export class DynamicFormComponent implements OnInit {
   setupLink() {
     if (this.item.type === 'bundle' && !this.isCreate) {
       this.showLink = true;
-      this.url = `paths/${this.item.id}`;
+      this.url = `/paths/${this.item.id}`;
       this.urlMessage = 'Edit paths';
     } else if (this.item.type === 'path' && !this.isCreate) {
       this.showLink = true;
-      this.url = `places/${this.item.id}`;
+      this.url = `/places/${this.item.id}`;
       this.urlMessage = 'Edit places';
     } else {
       this.showLink = false
@@ -48,7 +48,6 @@ export class DynamicFormComponent implements OnInit {
 
   toFormGroup(inputs: InputBase[]) {
     let group: any = {};
-
     inputs.forEach(input => {
       group[input.key] = input.required ? new FormControl(input.value || '', Validators.required)
         : new FormControl(input.value || '');
@@ -61,7 +60,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
   sendDelete() {
-    this.onDelete.emit(this.form.value)
+    this.onDelete.emit({id: this.item.id, type: this.item.type})
   }
 
 }
