@@ -1,5 +1,12 @@
-<mat-form-field
-  [formGroup]="form">
+<span [ngSwitch]="input.type">
+<mat-form-field *ngSwitchCase="'number'"
+                [formGroup]="form">
   <input matInput [formControlName]="input.key"
-         [id]="input.key" [type]="input.type" [placeholder]="input.label">
+         [id]="input.key" type="number" [placeholder]="input.label">
 </mat-form-field>
+  <mat-form-field *ngSwitchCase="'text'"
+                  [formGroup]="form">
+  <input matInput [formControlName]="input.key"
+         [id]="input.key" type="text" [placeholder]="input.label">
+</mat-form-field>
+</span>
