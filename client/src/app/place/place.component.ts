@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../data.service";
 import {ActivatedRoute} from "@angular/router";
+import {Place} from "./place";
+import {BasicItem} from "../basic-item";
+import {PlaceObject} from "./place-object";
 
 @Component({
   selector: 'app-place',
@@ -9,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class PlaceComponent implements OnInit {
 
-  places: Object[];
+  places: BasicItem[];
   private pathId: number;
 
   constructor(private dataService: DataService, private route: ActivatedRoute) {
@@ -25,18 +28,23 @@ export class PlaceComponent implements OnInit {
   get() {
     this.dataService.get("places", this.pathId)
       .then(data => {
-        this.places = data;
+        this.places = data.map((place: PlaceObject) => {
+          return new Place(place.id, place.name, place.info, place.image, place.radius)
+        });
+
       })
       .catch(err => console.log(err))
   }
 
   update(place) {
-    this.dataService.put("place", place, place.id)
+    console.log(JSON.stringify(place));
+    this.dataService.put("place", place.item, place.id)
       .then(data => console.log(data))
       .catch(err => console.log(err))
   }
 
   delete(place, index: number) {
+    console.log(JSON.stringify(place));
     this.dataService.delete("place", place.id)
       .then(() => {
         this.places.splice(index, 1);

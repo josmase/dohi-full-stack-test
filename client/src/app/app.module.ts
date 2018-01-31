@@ -14,9 +14,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PathFormComponent} from './path/path-form/path-form.component';
 import {BundleFormComponent} from './bundle/bundle-form/bundle-form.component';
-import {PlaceFormComponent} from './place/place-form/place-form.component';
-import { DynamicInputComponent } from './dynamic-form/dynamic-input/dynamic-input.component';
-import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import {DynamicInputComponent} from './dynamic-form/dynamic-input/dynamic-input.component';
+import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
     PlaceComponent,
     PathFormComponent,
     BundleFormComponent,
-    PlaceFormComponent,
     DynamicInputComponent,
     DynamicFormComponent
   ],
