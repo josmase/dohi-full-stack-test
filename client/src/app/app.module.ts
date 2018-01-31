@@ -9,11 +9,16 @@ import {PathComponent} from './path/path.component';
 import {PlaceComponent} from './place/place.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {DataService} from "./data.service";
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatToolbarModule} from "@angular/material";
+import {
+  MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule,
+  MatToolbarModule
+} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DynamicInputComponent} from './dynamic-form/dynamic-input/dynamic-input.component';
 import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
+import {CreateItemDialogComponent} from './create-item-dialog/create-item-dialog.component';
+import {OpenDialogService} from "./create-item-dialog/open-dialog.service";
 
 
 @NgModule({
@@ -23,7 +28,11 @@ import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
     PathComponent,
     PlaceComponent,
     DynamicInputComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    CreateItemDialogComponent
+  ],
+  entryComponents: [
+    CreateItemDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +45,10 @@ import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule
   ],
-  providers: [DataService],
+  providers: [DataService,OpenDialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
