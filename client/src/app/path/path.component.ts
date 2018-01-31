@@ -35,7 +35,7 @@ export class PathComponent implements OnInit {
 
   update(path) {
     console.log(path);
-    this.dataService.put("path", path.item, path.id)
+    this.dataService.put(path.type, path.item, path.id)
       .then(data => console.log(data))
       .catch(err => console.log(err))
   }

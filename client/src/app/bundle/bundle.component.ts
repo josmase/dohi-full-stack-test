@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from "../data.service";
 import {BundleObject} from "./bundle-object";
 import {Bundle} from "./bundle";
+import {OpenDialogService} from "../create-item-dialog/open-dialog.service";
 
 @Component({
   selector: 'app-bundle',
@@ -11,40 +12,36 @@ import {Bundle} from "./bundle";
 export class BundleComponent implements OnInit {
   bundles: Object[];
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private dialog: OpenDialogService) {
   }
 
   ngOnInit() {
     this.get();
+    setTimeout(() => this.dialog.open(new Bundle()), 2000)
   }
+
 
   get() {
     this.dataService.get("bundles")
       .then(data => {
         this.bundles = data.map((bundle: BundleObject) => {
-          return new Bundle(bundle.id, bundle.name, bundle.info, bundle.image)
+          return new Bundle( bundle.id, bundle.name, bundle.info, bundle.image)
         });
       })
       .catch(err => console.log(err))
   }
 
   update(bundle) {
-    this.dataService.put("bundle", bundle.item, bundle.id)
+    this.dataService.put(bundle.type, bundle.item, bundle.id)
       .then(data => console.log(data))
       .catch(err => console.log(err))
   }
 
   delete(bundle, index) {
-    this.dataService.delete("bundle", bundle.id)
+    this.dataService.delete(bundle.type, bundle.id)
       .then(() => {
         this.bundles.splice(index, 1);
       })
-      .catch(err => console.log(err))
-  }
-
-  create(bundle) {
-    this.dataService.post('bundle', bundle)
-      .then(() => this.get())
       .catch(err => console.log(err))
   }
 }

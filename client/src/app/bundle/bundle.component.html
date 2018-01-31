@@ -1,6 +1,4 @@
-
 <div class="wrapper">
-  <h1 class="mat-h1">Update</h1>
   <mat-card *ngFor="let bundle of bundles;let i=index">
     <app-dynamic-form [item]="bundle" (onSubmit)="update($event)" (onDelete)="delete($event,i)"></app-dynamic-form>
   </mat-card>
