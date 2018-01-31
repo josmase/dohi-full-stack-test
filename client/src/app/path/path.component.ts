@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../data.service";
 import {ActivatedRoute} from "@angular/router";
+import {Path} from "./path";
+import {PathObject} from "./path-object";
 
 @Component({
   selector: 'app-path',
@@ -24,13 +26,16 @@ export class PathComponent implements OnInit {
   get() {
     this.dataService.get("paths", this.bundleId)
       .then(data => {
-        this.paths = data;
+        this.paths = data.map((path: PathObject) => {
+          return new Path(path.id, path.name, path.info, path.image, path.length, path.duration,)
+        });
       })
       .catch(err => console.log(err))
   }
 
   update(path) {
-    this.dataService.put("path", path, path.id)
+    console.log(path);
+    this.dataService.put("path", path.item, path.id)
       .then(data => console.log(data))
       .catch(err => console.log(err))
   }
