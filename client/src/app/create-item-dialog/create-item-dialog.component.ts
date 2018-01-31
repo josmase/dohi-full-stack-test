@@ -17,11 +17,8 @@ export class CreateItemDialogComponent {
   create(data) {
     console.log(data);
     this.dataService.post(data.type, data.item, data.refId)
-      .then((data) => console.log(data))
+      .then(() => this.dialogRef.close())
       .catch(err => console.log(err))
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 }

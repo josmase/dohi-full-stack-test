@@ -9,14 +9,11 @@ export class OpenDialogService {
   constructor(private dialog: MatDialog) {
   }
 
-  open(item: BasicItem): void {
+  open(item: BasicItem) {
     let dialogRef = this.dialog.open(CreateItemDialogComponent, {
       width: '250px',
       data: item
     });
-    console.log(item);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    return dialogRef.afterClosed()
   }
 }
