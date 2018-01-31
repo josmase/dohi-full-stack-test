@@ -17,15 +17,19 @@ export class BundleComponent implements OnInit {
 
   ngOnInit() {
     this.get();
-    setTimeout(() => this.dialog.open(new Bundle()), 2000)
+    setTimeout(() => this.create(), 2000)
   }
 
+
+  create() {
+    this.dialog.open(new Bundle());
+  }
 
   get() {
     this.dataService.get("bundles")
       .then(data => {
         this.bundles = data.map((bundle: BundleObject) => {
-          return new Bundle( bundle.id, bundle.name, bundle.info, bundle.image)
+          return new Bundle(bundle.id, bundle.name, bundle.info, bundle.image)
         });
       })
       .catch(err => console.log(err))

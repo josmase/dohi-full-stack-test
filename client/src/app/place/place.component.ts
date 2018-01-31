@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Place} from "./place";
 import {BasicItem} from "../basic-item";
 import {PlaceObject} from "./place-object";
+import {OpenDialogService} from "../create-item-dialog/open-dialog.service";
 
 @Component({
   selector: 'app-place',
@@ -15,7 +16,7 @@ export class PlaceComponent implements OnInit {
   places: BasicItem[];
   private pathId: number;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute) {
+  constructor(private dataService: DataService, private route: ActivatedRoute, private dialog: OpenDialogService) {
   }
 
   ngOnInit() {
@@ -29,7 +30,7 @@ export class PlaceComponent implements OnInit {
     this.dataService.get("places", this.pathId)
       .then(data => {
         this.places = data.map((place: PlaceObject) => {
-          return new Place(place.id, place.name, place.info, place.image, place.radius)
+          return new Place(this.pathId, place.id, place.name, place.info, place.image, place.radius)
         });
 
       })
@@ -37,14 +38,12 @@ export class PlaceComponent implements OnInit {
   }
 
   update(place) {
-    console.log(JSON.stringify(place));
     this.dataService.put("place", place.item, place.id)
       .then(data => console.log(data))
       .catch(err => console.log(err))
   }
 
   delete(place, index: number) {
-    console.log(JSON.stringify(place));
     this.dataService.delete("place", place.id)
       .then(() => {
         this.places.splice(index, 1);
@@ -52,9 +51,7 @@ export class PlaceComponent implements OnInit {
       .catch(err => console.log(err))
   }
 
-  create(place) {
-    this.dataService.post('place', place, this.pathId)
-      .then(() => this.get())
-      .catch(err => console.log(err))
+  create() {
+    this.dialog.open(new Place(this.pathId));
   }
 }

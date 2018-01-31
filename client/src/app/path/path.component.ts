@@ -3,6 +3,7 @@ import {DataService} from "../data.service";
 import {ActivatedRoute} from "@angular/router";
 import {Path} from "./path";
 import {PathObject} from "./path-object";
+import {OpenDialogService} from "../create-item-dialog/open-dialog.service";
 
 @Component({
   selector: 'app-path',
@@ -13,13 +14,14 @@ export class PathComponent implements OnInit {
   paths: Object[];
   private bundleId: number;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute) {
+  constructor(private dataService: DataService, private route: ActivatedRoute, private dialog: OpenDialogService) {
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.bundleId = parseInt(params.get('bundleId'));
       this.get();
+      setTimeout(() => this.create(), 1000)
     })
   }
 
@@ -27,7 +29,7 @@ export class PathComponent implements OnInit {
     this.dataService.get("paths", this.bundleId)
       .then(data => {
         this.paths = data.map((path: PathObject) => {
-          return new Path(path.id, path.name, path.info, path.image, path.length, path.duration,)
+          return new Path(this.bundleId, path.id, path.name, path.info, path.image, path.length, path.duration,)
         });
       })
       .catch(err => console.log(err))
@@ -48,10 +50,8 @@ export class PathComponent implements OnInit {
       .catch(err => console.log(err))
   }
 
-  create(path) {
-    this.dataService.post('path', path, this.bundleId)
-      .then(() => this.get())
-      .catch(err => console.log(err))
+  create() {
+    this.dialog.open(new Path(this.bundleId));
   }
 
 }

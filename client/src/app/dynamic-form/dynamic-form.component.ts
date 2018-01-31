@@ -38,7 +38,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
   sendSubmit() {
-    this.onSubmit.emit({item: this.form.value, id: this.item.id});
+    this.onSubmit.emit({item: this.form.value, id: this.item.id, refId: this.item.refId, type: this.item.type});
   }
 
   sendDelete() {

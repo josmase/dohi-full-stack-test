@@ -15,7 +15,8 @@ export class CreateItemDialogComponent {
   }
 
   create(data) {
-    this.dataService.post('bundle', data.item)
+    console.log(data);
+    this.dataService.post(data.type, data.item, data.refId)
       .then((data) => console.log(data))
       .catch(err => console.log(err))
   }

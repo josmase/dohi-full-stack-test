@@ -6,9 +6,12 @@ export class BasicItem {
   info: InputBase;
   image: InputBase;
   type: string;
+  refId: number;
 
-  constructor(id: number, type: string, name: string, info: string, image: string) {
+  constructor(id: number, type: string, name: string, info: string, image: string, refId?: number) {
     this.id = id;
+    this.refId = refId;
+    this.type = type;
     this.name = new InputBase({key: 'name', label: 'Name', value: name, required: true, type: 'text'});
     this.info = new InputBase({key: 'info', label: 'Info', value: info, required: true, type: 'text'});
     this.image = new InputBase({key: 'image', label: 'Image', value: image, required: true, type: 'text'});

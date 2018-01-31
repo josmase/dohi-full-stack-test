@@ -14,7 +14,7 @@ export class OpenDialogService {
       width: '250px',
       data: item
     });
-
+    console.log(item);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
