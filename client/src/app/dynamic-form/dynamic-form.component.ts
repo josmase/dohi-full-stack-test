@@ -18,6 +18,10 @@ export class DynamicFormComponent implements OnInit {
   inputs: InputBase[];
   form: FormGroup;
 
+  showLink: boolean;
+  private url: string;
+  private urlMessage: string;
+
   constructor() {
   }
 
@@ -25,6 +29,21 @@ export class DynamicFormComponent implements OnInit {
     this.inputs = this.item.getFields();
     this.form = this.toFormGroup(this.inputs);
     this.submitText = this.isCreate ? "Create" : "Update";
+    this.setupLink()
+  }
+
+  setupLink() {
+    if (this.item.type === 'bundle' && !this.isCreate) {
+      this.showLink = true;
+      this.url = `paths/${this.item.id}`;
+      this.urlMessage = 'Edit paths';
+    } else if (this.item.type === 'path' && !this.isCreate) {
+      this.showLink = true;
+      this.url = `places/${this.item.id}`;
+      this.urlMessage = 'Edit places';
+    } else {
+      this.showLink = false
+    }
   }
 
   toFormGroup(inputs: InputBase[]) {

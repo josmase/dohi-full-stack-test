@@ -6,6 +6,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">{{submitText}}</button>
+    <a *ngIf="showLink" routerLink="{{url}}" mat-button>{{urlMessage}}</a>
     <button *ngIf="!isCreate" mat-button color="warn" (click)="sendDelete()">Delete</button>
   </mat-card-actions>
 </form>
