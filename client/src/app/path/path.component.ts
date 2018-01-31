@@ -21,7 +21,6 @@ export class PathComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.bundleId = parseInt(params.get('bundleId'));
       this.get();
-      setTimeout(() => this.create(), 1000)
     })
   }
 

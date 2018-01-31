@@ -17,7 +17,6 @@ export class BundleComponent implements OnInit {
 
   ngOnInit() {
     this.get();
-    setTimeout(() => this.create(), 2000)
   }
 
 
