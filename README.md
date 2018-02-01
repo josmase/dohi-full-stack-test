@@ -56,6 +56,32 @@ Setup of the tables is done by running the `setup.sql` file on the database that
 | POST   | /place/           | Creates a place                              | ID of the created place       | Status: 400, 500 |
 | PUT    | /place/:id        | Update a place                               | Object detailing changes made | Status: 400, 500 |
 
+### Dependencies
+ * Ajv: Well supported JSON-schema validator.
+ * mysql: A pure node.js JavaScript Client implementing the MySql protocol. 
+ * CORS: Express middleware to enable CORS and pre-flight checks.
+ * Express: To expose CRUD operations as a RESTful API.
+ * Morgan and Debug: For easy logging during development.
+ * body-parer: Middleware for parsing the JSON in the body.
+ 
+### Design
+
+#### Database
+
+The database consists of three tables bundle, path and place. 
+These contains columns with the members specified in the task.
+Except for the paths and places, these are instead created using foreign key constraints.
+
+#### API
+
+The API contains three main routes bundle, path and place. 
+Theses routes allow for CRUD operations to be made on the matching table.
+When using GET only one type will be returner.
+For example, running GET on bundle will return bundles, but they will not contain any paths.
+This is done to separate the routes and to make the request faster.
+To GET paths/places that are part of a bundle/path i chose to create routes that allows for all paths/places 
+to be retrieved, by using the id of the bundle/path that it belongs to.
+
 
 ## Client
 
@@ -66,3 +92,21 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+### Dependencies
+
+ * Angular Material: For easy styling and structuring.
+ * Material icons: For one icon in the create button.
+ * Angular cli: For building and development.
+ 
+### Design
+
+Like the API i opted to separate the bundles, paths and places from each other. 
+With one page for editing all the bundles, and buttons on each bundle to go to a page to edit its paths.
+The same thing was also done with the paths and places.
+
+Since the bundles, paths and places all needed forms and are very similar, i chose to create a dynamic form.
+This was done to reduce code repetition and to allow for expansion of fields in an easy way, 
+It also made it possible to create a single dialog for creation of all three types.
+Since the three types are so similar i also opted to use only one data service to handle the CRUD operations.
+ Instead of creating three almost identical services.
