@@ -3,14 +3,12 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class DataService {
-  apiEndpoint: String;
-  httpOptions: Object;
+  apiEndpoint = "http://localhost:3000/";
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
 
   constructor(private http: HttpClient) {
-    this.apiEndpoint = "http://localhost:3000/";
-    this.httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
   }
 
   get(type: String, id: Number = null): Promise<Object[]> {
