@@ -19,15 +19,15 @@ function query(sql, inserts) {
             sql = mysql.format(sql, inserts)
         }
         pool.getConnection((err, connection) => {
-            if (err) {
-                reject(err)
+            if (err !== null) {
+                return reject(err)
             }
             connection.query(sql, (err, results) => {
                 connection.release();
-                if (err) {
-                    reject(err)
+                if (err !== null) {
+                    return reject(err)
                 }
-                resolve(results)
+                return resolve(results)
             })
         })
     })
