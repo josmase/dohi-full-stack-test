@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Path} from "./path";
 import {PathObject} from "./path-object";
 import {OpenDialogService} from "../create-item-dialog/open-dialog.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-path',
@@ -14,7 +15,7 @@ export class PathComponent implements OnInit {
   paths: Object[];
   private bundleId: number;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute, private dialog: OpenDialogService) {
+  constructor(private dataService: DataService, private route: ActivatedRoute, private dialog: OpenDialogService,private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -37,8 +38,9 @@ export class PathComponent implements OnInit {
   update(path) {
     console.log(path);
     this.dataService.put(path.type, path.item, path.id)
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
+      .then(() => this.snackBar.open(`Updated ${path.item.name}`, null, {
+        duration: 2000,
+      })).catch(err => console.log(err))
   }
 
   delete(path, index) {

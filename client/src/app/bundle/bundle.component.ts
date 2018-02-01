@@ -3,6 +3,7 @@ import {DataService} from "../data.service";
 import {BundleObject} from "./bundle-object";
 import {Bundle} from "./bundle";
 import {OpenDialogService} from "../create-item-dialog/open-dialog.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-bundle',
@@ -12,7 +13,7 @@ import {OpenDialogService} from "../create-item-dialog/open-dialog.service";
 export class BundleComponent implements OnInit {
   bundles: Object[];
 
-  constructor(private dataService: DataService, private dialog: OpenDialogService) {
+  constructor(private dataService: DataService, private dialog: OpenDialogService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -36,8 +37,9 @@ export class BundleComponent implements OnInit {
 
   update(bundle) {
     this.dataService.put(bundle.type, bundle.item, bundle.id)
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
+      .then(() => this.snackBar.open(`Updated ${bundle.item.name}`, null, {
+        duration: 2000,
+      })).catch(err => console.log(err))
   }
 
   delete(bundle, index) {

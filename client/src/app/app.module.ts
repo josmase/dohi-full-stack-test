@@ -10,7 +10,7 @@ import {PlaceComponent} from './place/place.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {DataService} from "./data.service";
 import {
-  MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule,
+  MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSnackBarModule,
   MatToolbarModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -47,7 +47,8 @@ import {OpenDialogService} from "./create-item-dialog/open-dialog.service";
     MatButtonModule,
     MatToolbarModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ],
   providers: [DataService,OpenDialogService],
   bootstrap: [AppComponent]

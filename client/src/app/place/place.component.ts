@@ -5,6 +5,7 @@ import {Place} from "./place";
 import {BasicItem} from "../basic-item";
 import {PlaceObject} from "./place-object";
 import {OpenDialogService} from "../create-item-dialog/open-dialog.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-place',
@@ -16,7 +17,7 @@ export class PlaceComponent implements OnInit {
   places: BasicItem[];
   private pathId: number;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute, private dialog: OpenDialogService) {
+  constructor(private dataService: DataService, private route: ActivatedRoute, private dialog: OpenDialogService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -39,7 +40,9 @@ export class PlaceComponent implements OnInit {
 
   update(place) {
     this.dataService.put("place", place.item, place.id)
-      .then(data => console.log(data))
+      .then(() => this.snackBar.open(`Updated ${place.item.name}`, null, {
+        duration: 2000,
+      }))
       .catch(err => console.log(err))
   }
 
@@ -52,6 +55,6 @@ export class PlaceComponent implements OnInit {
   }
 
   create() {
-    this.dialog.open(new Place(this.pathId)).subscribe(()=>this.get());
+    this.dialog.open(new Place(this.pathId)).subscribe(() => this.get());
   }
 }
