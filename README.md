@@ -89,6 +89,7 @@ to be retrieved, by using the id of the bundle/path that it belongs to.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+If the endpoint of the API is not on `localhost:3000` it should be changed in the `client/src/app/data.service`.
 ### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
