@@ -1,12 +1,8 @@
-# Dohi full-stack test 
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.0. 
-And [Express generator](https://expressjs.com/en/starter/generator.html) version 4.15.5.
-## API
-### Setup
+# API
+## Setup
 
 The database must be setup before starting the server.
-#### Database
+### Database
 
 The database that should be used is MySQL or equivalent.
 
@@ -26,11 +22,11 @@ These should be changed to the correct `host`,`user`,`password` and`database`.
 
 Setup of the tables is done by running `mysql -u dohi -p dohi < sql/setup.sql` on the database that is going to be used.  
 
-#### Development server
+### Development server
 
 Run `npm start` to start the server.
 
-### Endpoints
+## Endpoints
 
 | Status | Meaning                                                        |
 |--------|----------------------------------------------------------------|
@@ -38,7 +34,7 @@ Run `npm start` to start the server.
 | 404    | The item could not be found                                    |
 | 400    | The data was malformed and could not be processed              |
 
-#### Bundle
+### Bundle
 
 | Type   | Url         | Description                     | Success                       | Failure          |
 |--------|-------------|---------------------------------|-------------------------------|------------------|
@@ -49,7 +45,7 @@ Run `npm start` to start the server.
 | PUT    | /bundle/:id | Update a bundle                 | Object detailing changes made | Status: 400, 500 |
 
 
-#### Path
+### Path
 
 | Type   | Url              | Description                                   | Success                       | Failure          |
 |--------|------------------|-----------------------------------------------|-------------------------------|------------------|
@@ -59,7 +55,7 @@ Run `npm start` to start the server.
 | POST   | /path/           | Creates a path                                | ID of the created path        | Status: 400, 500 |
 | PUT    | /path/:id        | Update a path                                 | Object detailing changes made | Status: 400, 500 |
 
-#### Place
+### Place
 
 | Type   | Url               | Description                                  | Success                       | Failure          |
 |--------|-------------------|----------------------------------------------|-------------------------------|------------------|
@@ -69,7 +65,7 @@ Run `npm start` to start the server.
 | POST   | /place/           | Creates a place                              | ID of the created place       | Status: 400, 500 |
 | PUT    | /place/:id        | Update a place                               | Object detailing changes made | Status: 400, 500 |
 
-### Dependencies
+## Dependencies
  * Ajv: Well supported JSON-schema validator.
  * mysql: A pure node.js JavaScript Client implementing the MySql protocol. 
  * CORS: Express middleware to enable CORS and pre-flight checks.
@@ -77,15 +73,15 @@ Run `npm start` to start the server.
  * Morgan and Debug: For easy logging during development.
  * body-parer: Middleware for parsing the JSON in the body.
  
-### Design
+## Design
 
-#### Database
+### Database
 
 The database consists of three tables bundle, path and place. 
 These contains columns with the members specified in the task.
 Except for the paths and places, these are instead created using foreign key constraints.
 
-#### API
+### API
 
 The API contains three main routes bundle, path and place. 
 Theses routes allow for CRUD operations to be made on the matching table.
@@ -96,24 +92,24 @@ To GET paths/places that are part of a bundle/path i chose to create routes that
 to be retrieved, by using the id of the bundle/path that it belongs to.
 
 
-## Client
+# Client
 
-### Development server
+## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 If the endpoint of the API is not on `localhost:3000` it should be changed in the `client/src/app/data.service`.
-### Build
+## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-### Dependencies
+## Dependencies
 
  * Angular Material: For easy styling and structuring.
  * Material icons: For one icon in the create button.
  * Angular cli: For building and development.
  
-### Design
+## Design
 
 Like the API i opted to separate the bundles, paths and places from each other. 
 With one page for editing all the bundles, and buttons on each bundle to go to a page to edit its paths.
