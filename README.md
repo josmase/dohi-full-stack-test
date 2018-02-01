@@ -120,3 +120,29 @@ This was done to reduce code repetition and to allow for expansion of fields in 
 It also made it possible to create a single dialog for creation of all three types.
 Since the three types are so similar i also opted to use only one data service to handle the CRUD operations.
  Instead of creating three almost identical services.
+
+## Images
+
+How it looks when viewing all the bundles
+
+![Image of the client when viewing bundles](https://raw.githubusercontent.com/josmase/dohi-full-stack-test/master/images/bundle.PNG)
+
+How it looks when creating a bundle
+
+![Image of the client when viewing create bundle](https://raw.githubusercontent.com/josmase/dohi-full-stack-test/master/images/budleCreate.PNG)
+
+How it looks when viewing all the paths of a bundle
+
+![Image of the client when viewing paths](https://raw.githubusercontent.com/josmase/dohi-full-stack-test/master/images/path.PNG)
+
+How it looks when creating a path of a bundle
+
+![Image of the client when viewing create path](https://raw.githubusercontent.com/josmase/dohi-full-stack-test/master/images/pathCreate.PNG)
+
+How it looks when viewing all the places of a path
+
+![Image of the client when viewing places](https://raw.githubusercontent.com/josmase/dohi-full-stack-test/master/images/place.PNG)
+
+How it looks when creating a place of a path
+
+![Image of the client when viewing create places](https://raw.githubusercontent.com/josmase/dohi-full-stack-test/master/images/placeCreate.PNG)
