@@ -3,19 +3,32 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.0. 
 And [Express generator](https://expressjs.com/en/starter/generator.html) version 4.15.5.
 ## API
+### Setup
 
-### Development server
-
-Run `npm start` to start the server.
-
-### Database
+The database must be setup before starting the server.
+#### Database
 
 The database that should be used is MySQL or equivalent.
+
+To use MySQL follow the instructions on [this](https://dev.mysql.com/doc/refman/5.7/en/installing.html) page to install.
+Once MySQL is installed run 
+
+`mysql -u root -p`
+
+`CREATE DATABASE dohi;`
+
+`CREATE USER 'dohi'@'localhost' IDENTIFIED BY 'dohi';`
+
+`GRANT ALL PRIVILEGES ON dohi. * TO 'dohi'@'localhost';`
 
 The settings for changing the database are in the `database.js` file. 
 These should be changed to the correct `host`,`user`,`password` and`database`.
 
-Setup of the tables is done by running the `setup.sql` file on the database that is going to be used.  
+Setup of the tables is done by running `mysql -u dohi -p dohi < sql/setup.sql` on the database that is going to be used.  
+
+#### Development server
+
+Run `npm start` to start the server.
 
 ### Endpoints
 
